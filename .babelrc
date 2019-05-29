@@ -1,11 +1,15 @@
 {
-  "presets": [
-    ["@babel/preset-env", {
-      "useBuiltIns": "entry",
-      "corejs": 3
-    }]
+  presets: [
+    [
+      "@babel/preset-env",
+      {
+        useBuiltIns: 'entry', //entry usage, usage is not stable
+        corejs: 3,
+      }
+    ]
   ],
-  "plugins": [
-    "@babel/plugin-proposal-export-default-from"
+  plugins: [
+    "@babel/plugin-proposal-export-default-from",
+    "@babel/plugin-transform-runtime"
   ]
 }
