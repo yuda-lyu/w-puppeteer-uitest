@@ -49,7 +49,7 @@ async function buildExpected(fd_src, fd_tar, fd_mod, num_web = 10) {
 
     //mapSeries 循序, map 平行化處理
     return b.map(ltfs, async function (v) {
-        //console.log('test: ' + v)
+        console.log('build: ' + v)
 
         //name
         let name = v.replace('.html', '')
@@ -60,6 +60,7 @@ async function buildExpected(fd_src, fd_tar, fd_mod, num_web = 10) {
         //saveB64FromScreenshot
         await saveB64FromScreenshot(url, fd_src + v, fd_tar + name)
 
+        console.log('success: ' + v)
     }, { concurrency: num_web })
         .then(() => {
             console.log('\x1b[32m%s\x1b[0m', 'buildExpected success')
@@ -103,7 +104,7 @@ async function testExpected(fd_src, fd_tar, fd_mod, num_web = 10) {
     //mapSeries 循序, map 平行化處理
     let bstop = false //若使用map平行化時, 多執行序啟動瀏覽器有錯誤會先reject, 但其他已啟動的瀏覽器一樣仍於閉包內會完成該任務, 故會呼叫所屬console.log, 通過bstop來停止這種情況之輸出
     return b.map(ltfs, async function(v) {
-        //console.log('test: ' + v)
+        console.log('test: ' + v)
 
         //name
         let name = v.replace('.html', '')

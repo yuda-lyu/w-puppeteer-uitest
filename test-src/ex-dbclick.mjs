@@ -5,7 +5,7 @@ async function getB64ByAction(fn) {
     let opt = {
         actions: [
             {
-                mode: 'elehover',
+                mode: 'eledbclick',
                 selector: '#btn',
             },
         ]

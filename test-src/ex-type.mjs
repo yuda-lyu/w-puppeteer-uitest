@@ -1,7 +1,7 @@
-import getB64FromScreenshot from '../src/getB64FromScreenshot.mjs'
+import getB64 from '../src/getB64.mjs'
 
 
-async function getb64(fn) {
+async function getB64ByAction(fn) {
     let opt = {
         actions: [
             {
@@ -14,9 +14,9 @@ async function getb64(fn) {
             },
         ]
     }
-    return getB64FromScreenshot(fn, opt)
+    return getB64(fn, opt)
 }
 
 
-export default getb64
+export default getB64ByAction
 
