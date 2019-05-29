@@ -20,16 +20,17 @@ import cint from 'wsemi/src/cint.mjs'
  * @param {Array} [opt.actions=[]] 輸入網頁開啟後之操作動作，預設為[]
  * @param {Object} opt.action 輸入action動作物件
  * @param {Object} opt.action.mode 動作模式字串，可選'wait','move','elemove','elehover',drag','eledrag','click','eleclick','dbclick','eledbclick','type'
- * @param {Object} opt.action 若action.mode使用'wait'，需輸入time，單位為毫秒
- * @param {Object} opt.action 若action.mode使用'move'，需輸入x1,y1，為相對網頁內容左上角位置，單位為px
- * @param {Object} opt.action 若action.mode使用'elemove'，需輸入selector,nth(可選)，selector為css選擇器，nth為陣列結果取第nth個dom元素
- * @param {Object} opt.action 若action.mode使用'elehover'，需輸入selector，selector為css選擇器，若有超過1個結果則取第1個dom元素
- * @param {Object} opt.action 若action.mode使用'drag'，需輸入x1,y1,x2,y2，由(x1,y1)拖曳至(x2,y2)，為相對網頁內容左上角位置，單位為px
- * @param {Object} opt.action 若action.mode使用'eledrag'，需輸入selector,nth(可選),shiftx,shifty，由元素中心拖曳平移(shiftx,shifty)，selector為css選擇器，nth為陣列結果取第nth個dom元素，shiftx,shifty單位為px
- * @param {Object} opt.action 若action.mode使用'click'，需輸入x1,y1，為相對網頁內容左上角位置，單位為px
- * @param {Object} opt.action 若action.mode使用'eleclick'，需輸入selector,nth(可選)，selector為css選擇器，nth為陣列結果取第nth個dom元素
- * @param {Object} opt.action 若action.mode使用'dbclick'，需輸入x1,y1，為相對網頁內容左上角位置，單位為px
- * @param {Object} opt.action 若action.mode使用'eledbclick'，需輸入selector,nth(可選)，selector為css選擇器，nth為陣列結果取第nth個dom元素
+ * @param {Object} opt.action 若action.mode使用'wait'，需再輸入{time}，單位為毫秒
+ * @param {Object} opt.action 若action.mode使用'resize'，需再輸入{width,height}，為網頁可視區域(viewport)的長寬，單位為整數
+ * @param {Object} opt.action 若action.mode使用'move'，需再輸入{x1,y1}，為相對網頁內容左上角位置，單位為px
+ * @param {Object} opt.action 若action.mode使用'elemove'，需再輸入{selector,nth(可選)}，selector為css選擇器，nth為陣列結果取第nth個dom元素
+ * @param {Object} opt.action 若action.mode使用'elehover'，需再輸入{selector}，selector為css選擇器，若有超過1個結果則取第1個dom元素
+ * @param {Object} opt.action 若action.mode使用'drag'，需再輸入{x1,y1,x2,y2}，由(x1,y1)拖曳至(x2,y2)，為相對網頁內容左上角位置，單位為px
+ * @param {Object} opt.action 若action.mode使用'eledrag'，需再輸入{selector,nth(可選),shiftx,shifty}，由元素中心拖曳平移(shiftx,shifty)，selector為css選擇器，nth為陣列結果取第nth個dom元素，shiftx,shifty單位為px
+ * @param {Object} opt.action 若action.mode使用'click'，需再輸入{x1,y1}，為相對網頁內容左上角位置，單位為px
+ * @param {Object} opt.action 若action.mode使用'eleclick'，需再輸入{selector,nth(可選)}，selector為css選擇器，nth為陣列結果取第nth個dom元素
+ * @param {Object} opt.action 若action.mode使用'dbclick'，需再輸入{x1,y1}，為相對網頁內容左上角位置，單位為px
+ * @param {Object} opt.action 若action.mode使用'eledbclick'，需再輸入{selector,nth(可選)}，selector為css選擇器，nth為陣列結果取第nth個dom元素
  * @param {Integer} [opt.waitsec=5] 輸入開啟網頁後之等待時間，單位為秒，預設為5
  * @returns {String} 回傳screenshot圖片轉base64資料
  */
@@ -111,13 +112,13 @@ async function getB64(url, opt = {}) {
         if (n === 0) {
             ele = await page.$(selector)
             if (iser(ele)) {
-                console.log('page.$ not result: ' + selector)
+                console.log('page.$ get no result: ' + selector)
             }
         }
         else {
             let eles = await page.$$(selector)
             if (eles.length === 0) {
-                console.log('page.$$ not result: ' + selector)
+                console.log('page.$$ get no result: ' + selector)
             }
             ele = eles[n]
         }
@@ -150,6 +151,16 @@ async function getB64(url, opt = {}) {
     await b.mapSeries(actions, async function(v) {
         if (v.mode === 'wait') {
             await page.waitFor(v.time)
+        }
+        else if (v.mode === 'resize') {
+            await page.waitFor(300)
+            await page.setViewport({
+                x: 0,
+                y: 0,
+                width: v.width,
+                height: v.height,
+            })
+            await page.waitFor(300)
         }
         else if (v.mode === 'move') {
             await page.waitFor(300)
@@ -208,6 +219,9 @@ async function getB64(url, opt = {}) {
             await page.waitFor(300)
             await page.keyboard.type(v.str, { delay: 50 })
             await page.keyboard.type(String.fromCharCode(13))
+        }
+        else {
+            console.log('mode is unrecognized: ' + v.mode)
         }
         // else if (v.mode === 'press') {
         //     await page.waitFor(300)

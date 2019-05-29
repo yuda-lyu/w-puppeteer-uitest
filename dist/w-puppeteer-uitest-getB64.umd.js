@@ -1,5 +1,5 @@
 /*!
- * w-puppeteer-uitest v1.0.2
+ * w-puppeteer-uitest v1.0.3
  * (c) 2018-2019 yuda-lyu(semisphere)
  * Released under the MIT License.
  */
@@ -2647,16 +2647,17 @@
 	 * @param {Array} [opt.actions=[]] 輸入網頁開啟後之操作動作，預設為[]
 	 * @param {Object} opt.action 輸入action動作物件
 	 * @param {Object} opt.action.mode 動作模式字串，可選'wait','move','elemove','elehover',drag','eledrag','click','eleclick','dbclick','eledbclick','type'
-	 * @param {Object} opt.action 若action.mode使用'wait'，需輸入time，單位為毫秒
-	 * @param {Object} opt.action 若action.mode使用'move'，需輸入x1,y1，為相對網頁內容左上角位置，單位為px
-	 * @param {Object} opt.action 若action.mode使用'elemove'，需輸入selector,nth(可選)，selector為css選擇器，nth為陣列結果取第nth個dom元素
-	 * @param {Object} opt.action 若action.mode使用'elehover'，需輸入selector，selector為css選擇器，若有超過1個結果則取第1個dom元素
-	 * @param {Object} opt.action 若action.mode使用'drag'，需輸入x1,y1,x2,y2，由(x1,y1)拖曳至(x2,y2)，為相對網頁內容左上角位置，單位為px
-	 * @param {Object} opt.action 若action.mode使用'eledrag'，需輸入selector,nth(可選),shiftx,shifty，由元素中心拖曳平移(shiftx,shifty)，selector為css選擇器，nth為陣列結果取第nth個dom元素，shiftx,shifty單位為px
-	 * @param {Object} opt.action 若action.mode使用'click'，需輸入x1,y1，為相對網頁內容左上角位置，單位為px
-	 * @param {Object} opt.action 若action.mode使用'eleclick'，需輸入selector,nth(可選)，selector為css選擇器，nth為陣列結果取第nth個dom元素
-	 * @param {Object} opt.action 若action.mode使用'dbclick'，需輸入x1,y1，為相對網頁內容左上角位置，單位為px
-	 * @param {Object} opt.action 若action.mode使用'eledbclick'，需輸入selector,nth(可選)，selector為css選擇器，nth為陣列結果取第nth個dom元素
+	 * @param {Object} opt.action 若action.mode使用'wait'，需再輸入{time}，單位為毫秒
+	 * @param {Object} opt.action 若action.mode使用'resize'，需再輸入{width,height}，為網頁可視區域(viewport)的長寬，單位為整數
+	 * @param {Object} opt.action 若action.mode使用'move'，需再輸入{x1,y1}，為相對網頁內容左上角位置，單位為px
+	 * @param {Object} opt.action 若action.mode使用'elemove'，需再輸入{selector,nth(可選)}，selector為css選擇器，nth為陣列結果取第nth個dom元素
+	 * @param {Object} opt.action 若action.mode使用'elehover'，需再輸入{selector}，selector為css選擇器，若有超過1個結果則取第1個dom元素
+	 * @param {Object} opt.action 若action.mode使用'drag'，需再輸入{x1,y1,x2,y2}，由(x1,y1)拖曳至(x2,y2)，為相對網頁內容左上角位置，單位為px
+	 * @param {Object} opt.action 若action.mode使用'eledrag'，需再輸入{selector,nth(可選),shiftx,shifty}，由元素中心拖曳平移(shiftx,shifty)，selector為css選擇器，nth為陣列結果取第nth個dom元素，shiftx,shifty單位為px
+	 * @param {Object} opt.action 若action.mode使用'click'，需再輸入{x1,y1}，為相對網頁內容左上角位置，單位為px
+	 * @param {Object} opt.action 若action.mode使用'eleclick'，需再輸入{selector,nth(可選)}，selector為css選擇器，nth為陣列結果取第nth個dom元素
+	 * @param {Object} opt.action 若action.mode使用'dbclick'，需再輸入{x1,y1}，為相對網頁內容左上角位置，單位為px
+	 * @param {Object} opt.action 若action.mode使用'eledbclick'，需再輸入{selector,nth(可選)}，selector為css選擇器，nth為陣列結果取第nth個dom元素
 	 * @param {Integer} [opt.waitsec=5] 輸入開啟網頁後之等待時間，單位為秒，預設為5
 	 * @returns {String} 回傳screenshot圖片轉base64資料
 	 */
@@ -2715,7 +2716,7 @@
 	                        ele = _context2.sent;
 
 	                        if (iser(ele)) {
-	                          console.log('page.$ not result: ' + selector);
+	                          console.log('page.$ get no result: ' + selector);
 	                        }
 
 	                        _context2.next = 14;
@@ -2729,7 +2730,7 @@
 	                        eles = _context2.sent;
 
 	                        if (eles.length === 0) {
-	                          console.log('page.$$ not result: ' + selector);
+	                          console.log('page.$$ get no result: ' + selector);
 	                        }
 
 	                        ele = eles[n];
@@ -2863,11 +2864,11 @@
 	                        return page.waitFor(v.time);
 
 	                      case 3:
-	                        _context.next = 111;
+	                        _context.next = 123;
 	                        break;
 
 	                      case 5:
-	                        if (!(v.mode === 'move')) {
+	                        if (!(v.mode === 'resize')) {
 	                          _context.next = 14;
 	                          break;
 	                        }
@@ -2877,19 +2878,24 @@
 
 	                      case 8:
 	                        _context.next = 10;
-	                        return page.mouse.move(v.x1, v.y1);
+	                        return page.setViewport({
+	                          x: 0,
+	                          y: 0,
+	                          width: v.width,
+	                          height: v.height
+	                        });
 
 	                      case 10:
 	                        _context.next = 12;
 	                        return page.waitFor(300);
 
 	                      case 12:
-	                        _context.next = 111;
+	                        _context.next = 123;
 	                        break;
 
 	                      case 14:
-	                        if (!(v.mode === 'elemove')) {
-	                          _context.next = 26;
+	                        if (!(v.mode === 'move')) {
+	                          _context.next = 23;
 	                          break;
 	                        }
 
@@ -2898,45 +2904,45 @@
 
 	                      case 17:
 	                        _context.next = 19;
-	                        return getxy(v.selector, v.nth);
+	                        return page.mouse.move(v.x1, v.y1);
 
 	                      case 19:
-	                        r = _context.sent;
-	                        _context.next = 22;
-	                        return page.mouse.move(r.cx, r.cy);
-
-	                      case 22:
-	                        _context.next = 24;
+	                        _context.next = 21;
 	                        return page.waitFor(300);
 
-	                      case 24:
-	                        _context.next = 111;
+	                      case 21:
+	                        _context.next = 123;
 	                        break;
 
-	                      case 26:
-	                        if (!(v.mode === 'elehover')) {
+	                      case 23:
+	                        if (!(v.mode === 'elemove')) {
 	                          _context.next = 35;
 	                          break;
 	                        }
 
-	                        _context.next = 29;
+	                        _context.next = 26;
 	                        return page.waitFor(300);
 
-	                      case 29:
+	                      case 26:
+	                        _context.next = 28;
+	                        return getxy(v.selector, v.nth);
+
+	                      case 28:
+	                        r = _context.sent;
 	                        _context.next = 31;
-	                        return page.hover(v.selector);
+	                        return page.mouse.move(r.cx, r.cy);
 
 	                      case 31:
 	                        _context.next = 33;
 	                        return page.waitFor(300);
 
 	                      case 33:
-	                        _context.next = 111;
+	                        _context.next = 123;
 	                        break;
 
 	                      case 35:
-	                        if (!(v.mode === 'drag')) {
-	                          _context.next = 52;
+	                        if (!(v.mode === 'elehover')) {
+	                          _context.next = 44;
 	                          break;
 	                        }
 
@@ -2945,178 +2951,206 @@
 
 	                      case 38:
 	                        _context.next = 40;
-	                        return page.mouse.move(v.x1, v.y1);
+	                        return page.hover(v.selector);
 
 	                      case 40:
 	                        _context.next = 42;
-	                        return page.mouse.down();
-
-	                      case 42:
-	                        _context.next = 44;
 	                        return page.waitFor(300);
 
+	                      case 42:
+	                        _context.next = 123;
+	                        break;
+
 	                      case 44:
-	                        _context.next = 46;
+	                        if (!(v.mode === 'drag')) {
+	                          _context.next = 61;
+	                          break;
+	                        }
+
+	                        _context.next = 47;
+	                        return page.waitFor(300);
+
+	                      case 47:
+	                        _context.next = 49;
+	                        return page.mouse.move(v.x1, v.y1);
+
+	                      case 49:
+	                        _context.next = 51;
+	                        return page.mouse.down();
+
+	                      case 51:
+	                        _context.next = 53;
+	                        return page.waitFor(300);
+
+	                      case 53:
+	                        _context.next = 55;
 	                        return page.mouse.move(v.x2, v.y2, {
 	                          steps: 50
 	                        });
 
-	                      case 46:
-	                        _context.next = 48;
+	                      case 55:
+	                        _context.next = 57;
 	                        return page.waitFor(300);
 
-	                      case 48:
-	                        _context.next = 50;
+	                      case 57:
+	                        _context.next = 59;
 	                        return page.mouse.up();
 
-	                      case 50:
-	                        _context.next = 111;
+	                      case 59:
+	                        _context.next = 123;
 	                        break;
 
-	                      case 52:
+	                      case 61:
 	                        if (!(v.mode === 'eledrag')) {
-	                          _context.next = 72;
+	                          _context.next = 81;
 	                          break;
 	                        }
 
-	                        _context.next = 55;
-	                        return page.waitFor(300);
-
-	                      case 55:
-	                        _context.next = 57;
-	                        return getxy(v.selector, v.nth);
-
-	                      case 57:
-	                        _r = _context.sent;
-	                        _context.next = 60;
-	                        return page.mouse.move(_r.cx, _r.cy);
-
-	                      case 60:
-	                        _context.next = 62;
-	                        return page.mouse.down();
-
-	                      case 62:
 	                        _context.next = 64;
 	                        return page.waitFor(300);
 
 	                      case 64:
 	                        _context.next = 66;
+	                        return getxy(v.selector, v.nth);
+
+	                      case 66:
+	                        _r = _context.sent;
+	                        _context.next = 69;
+	                        return page.mouse.move(_r.cx, _r.cy);
+
+	                      case 69:
+	                        _context.next = 71;
+	                        return page.mouse.down();
+
+	                      case 71:
+	                        _context.next = 73;
+	                        return page.waitFor(300);
+
+	                      case 73:
+	                        _context.next = 75;
 	                        return page.mouse.move(_r.cx + v.shiftx, _r.cy + v.shifty, {
 	                          steps: 50
 	                        });
 
-	                      case 66:
-	                        _context.next = 68;
-	                        return page.waitFor(300);
-
-	                      case 68:
-	                        _context.next = 70;
-	                        return page.mouse.up();
-
-	                      case 70:
-	                        _context.next = 111;
-	                        break;
-
-	                      case 72:
-	                        if (!(v.mode === 'click')) {
-	                          _context.next = 83;
-	                          break;
-	                        }
-
-	                        _context.next = 75;
-	                        return page.waitFor(300);
-
 	                      case 75:
 	                        _context.next = 77;
-	                        return page.mouse.move(v.x1, v.y1);
+	                        return page.waitFor(300);
 
 	                      case 77:
 	                        _context.next = 79;
-	                        return page.mouse.down();
-
-	                      case 79:
-	                        _context.next = 81;
 	                        return page.mouse.up();
 
-	                      case 81:
-	                        _context.next = 111;
+	                      case 79:
+	                        _context.next = 123;
 	                        break;
 
-	                      case 83:
-	                        if (!(v.mode === 'eleclick')) {
-	                          _context.next = 90;
+	                      case 81:
+	                        if (!(v.mode === 'click')) {
+	                          _context.next = 92;
 	                          break;
 	                        }
 
-	                        _context.next = 86;
+	                        _context.next = 84;
 	                        return page.waitFor(300);
+
+	                      case 84:
+	                        _context.next = 86;
+	                        return page.mouse.move(v.x1, v.y1);
 
 	                      case 86:
 	                        _context.next = 88;
-	                        return page.click(v.selector);
+	                        return page.mouse.down();
 
 	                      case 88:
-	                        _context.next = 111;
-	                        break;
+	                        _context.next = 90;
+	                        return page.mouse.up();
 
 	                      case 90:
-	                        if (!(v.mode === 'dbclick')) {
-	                          _context.next = 97;
+	                        _context.next = 123;
+	                        break;
+
+	                      case 92:
+	                        if (!(v.mode === 'eleclick')) {
+	                          _context.next = 99;
 	                          break;
 	                        }
 
-	                        _context.next = 93;
+	                        _context.next = 95;
 	                        return page.waitFor(300);
 
-	                      case 93:
-	                        _context.next = 95;
+	                      case 95:
+	                        _context.next = 97;
+	                        return page.click(v.selector);
+
+	                      case 97:
+	                        _context.next = 123;
+	                        break;
+
+	                      case 99:
+	                        if (!(v.mode === 'dbclick')) {
+	                          _context.next = 106;
+	                          break;
+	                        }
+
+	                        _context.next = 102;
+	                        return page.waitFor(300);
+
+	                      case 102:
+	                        _context.next = 104;
 	                        return page.mouse.click(v.x1, v.y1, {
 	                          clickCount: 2
 	                        });
 
-	                      case 95:
-	                        _context.next = 111;
+	                      case 104:
+	                        _context.next = 123;
 	                        break;
 
-	                      case 97:
+	                      case 106:
 	                        if (!(v.mode === 'eledbclick')) {
-	                          _context.next = 104;
+	                          _context.next = 113;
 	                          break;
 	                        }
 
-	                        _context.next = 100;
+	                        _context.next = 109;
 	                        return page.waitFor(300);
 
-	                      case 100:
-	                        _context.next = 102;
+	                      case 109:
+	                        _context.next = 111;
 	                        return page.click(v.selector, {
 	                          clickCount: 2
 	                        });
 
-	                      case 102:
-	                        _context.next = 111;
+	                      case 111:
+	                        _context.next = 123;
 	                        break;
 
-	                      case 104:
+	                      case 113:
 	                        if (!(v.mode === 'type')) {
-	                          _context.next = 111;
+	                          _context.next = 122;
 	                          break;
 	                        }
 
-	                        _context.next = 107;
+	                        _context.next = 116;
 	                        return page.waitFor(300);
 
-	                      case 107:
-	                        _context.next = 109;
+	                      case 116:
+	                        _context.next = 118;
 	                        return page.keyboard.type(v.str, {
 	                          delay: 50
 	                        });
 
-	                      case 109:
-	                        _context.next = 111;
+	                      case 118:
+	                        _context.next = 120;
 	                        return page.keyboard.type(String.fromCharCode(13));
 
-	                      case 111:
+	                      case 120:
+	                        _context.next = 123;
+	                        break;
+
+	                      case 122:
+	                        console.log('mode is unrecognized: ' + v.mode);
+
+	                      case 123:
 	                      case "end":
 	                        return _context.stop();
 	                    }
