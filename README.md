@@ -6,7 +6,7 @@ A uitest package for web developer.
 [![Build Status](https://travis-ci.org/yuda-lyu/w-puppeteer-uitest.svg?branch=master)](https://travis-ci.org/yuda-lyu/w-puppeteer-uitest) 
 [![license](https://img.shields.io/npm/l/w-puppeteer-uitest.svg?style=flat)](https://npmjs.org/package/w-puppeteer-uitest) 
 [![npm download](https://img.shields.io/npm/dt/w-puppeteer-uitest.svg)](https://npmjs.org/package/w-puppeteer-uitest) 
-[![jsdelivr download](https://data.jsdelivr.com/v1/package/npm/w-puppeteer-uitest/badge)](https://www.jsdelivr.com/package/npm/w-puppeteer-uitest)
+[![jsdelivr download](https://img.shields.io/jsdelivr/npm/hm/w-puppeteer-uitest.svg)](https://www.jsdelivr.com/package/npm/w-puppeteer-uitest)
 
 ## Documentation
 To view documentation or get support, visit [docs](https://yuda-lyu.github.io/w-puppeteer-uitest/w-puppeteer-uitest.html).
