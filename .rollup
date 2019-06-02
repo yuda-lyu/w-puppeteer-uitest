@@ -12,6 +12,7 @@ let pkg=JSON.parse(fs.readFileSync('package.json', 'utf8'))
 let optBabel={
       runtimeHelpers: true,
       exclude: 'node_modules/**',
+      include: 'node_modules/wsemi/**', //need compile wsemi
       presets: [
         [
           "@babel/preset-env",
@@ -22,8 +23,8 @@ let optBabel={
         ]
       ],
       plugins: [
-        "@babel/plugin-proposal-export-default-from",
-        "@babel/plugin-transform-runtime"
+        //"@babel/plugin-proposal-export-default-from",
+        //"@babel/plugin-transform-runtime"
       ]
     }
 
@@ -87,7 +88,7 @@ export default [
       postcss({
         extensions: ['.css']
       }),
-      //minify({ comments: false, }),
+      minify({ comments: false, }),
     ]
   }
 ]
