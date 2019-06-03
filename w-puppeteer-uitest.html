@@ -27,7 +27,7 @@
 
 <nav >
     
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="w-puppeteer-uitest.html">w-puppeteer-uitest</a><ul class='methods'><li data-type='method'><a href="w-puppeteer-uitest.html#.buildExpected">buildExpected</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.getB64">getB64</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.importGetB64FromScreenshot">importGetB64FromScreenshot</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.saveB64">saveB64</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.saveB64FromScreenshot">saveB64FromScreenshot</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.testExpected">testExpected</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="w-puppeteer-uitest.html">w-puppeteer-uitest</a><ul class='methods'><li data-type='method'><a href="w-puppeteer-uitest.html#.buildExpected">buildExpected</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.getB64">getB64</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.imgb64Compare">imgb64Compare</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.importGetB64FromScreenshot">importGetB64FromScreenshot</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.saveB64">saveB64</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.saveB64FromScreenshot">saveB64FromScreenshot</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.testExpected">testExpected</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -175,7 +175,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="testScreenshot.mjs.html">testScreenshot.mjs</a>, <a href="testScreenshot.mjs.html#line39">line 39</a>
+        <a href="testScreenshot.mjs.html">testScreenshot.mjs</a>, <a href="testScreenshot.mjs.html#line40">line 40</a>
     </li></ul></dd>
     
 
@@ -1314,6 +1314,187 @@
 
     
 
+    <h4 class="name" id=".imgb64Compare"><span class="type-signature">(async, static) </span>imgb64Compare<span class="signature">(b64_a, b64_b)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="imgb64Compare.mjs.html">imgb64Compare.mjs</a>, <a href="imgb64Compare.mjs.html#line50">line 50</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>2張圖片base64比對</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>b64_a</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>輸入圖片a的base64格式字串</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>b64_b</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>輸入圖片b的base64格式字串</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>回傳Promise，resolve為相似度0~1，reject為處理失敗</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
     <h4 class="name" id=".importGetB64FromScreenshot"><span class="type-signature">(static) </span>importGetB64FromScreenshot<span class="signature">(url_mod, url_tar)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
 
     
@@ -2242,7 +2423,7 @@
 
     
 
-    <h4 class="name" id=".testExpected"><span class="type-signature">(async, static) </span>testExpected<span class="signature">(fd_src, fd_tar, fd_mod, num_web<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id=".testExpected"><span class="type-signature">(async, static) </span>testExpected<span class="signature">(fd_src, fd_tar, fd_mod, num_web<span class="signature-attributes">opt</span>, ratio_similar<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
 
     
 
@@ -2254,7 +2435,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="testScreenshot.mjs.html">testScreenshot.mjs</a>, <a href="testScreenshot.mjs.html#line85">line 85</a>
+        <a href="testScreenshot.mjs.html">testScreenshot.mjs</a>, <a href="testScreenshot.mjs.html#line87">line 87</a>
     </li></ul></dd>
     
 
@@ -2477,6 +2658,45 @@
         </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>ratio_similar</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>1</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入偵測圖片相近度，預設為1，也就是完全相似</p></td>
+        </tr>
+
+    
     </tbody>
 </table>
 
@@ -2540,7 +2760,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> on Wed May 29 2019 20:46:44 GMT+0800 (GMT+08:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> on Mon Jun 03 2019 21:59:57 GMT+0800 (GMT+08:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
