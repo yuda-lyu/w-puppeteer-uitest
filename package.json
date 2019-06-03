@@ -1,13 +1,14 @@
 {
   "name": "w-puppeteer-uitest",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A uitest package for web developer.",
   "main": "",
   "dependencies": {
     "bluebird": "^3.5.5",
+    "jimp": "^0.6.4",
     "lodash": "^4.17.11",
     "puppeteer": "^1.17.0",
-    "wsemi": "^1.1.5"
+    "wsemi": "^1.1.9"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
@@ -42,7 +43,8 @@
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-resolve": "^5.0.1",
     "rollup-plugin-postcss": "^2.0.3",
-    "rollup-plugin-vue": "^5.0.0"
+    "rollup-plugin-vue": "^5.0.0",
+    "vue-template-compiler": "^2.6.10"
   },
   "scripts": {
     "test": "mocha --require @babel/register",

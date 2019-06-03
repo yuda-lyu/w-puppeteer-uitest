@@ -23,5 +23,5 @@ if (mode === 'build') {
     buildExpected(fd_html, fd_screen, fd_action)
 }
 else {
-    testExpected(fd_html, fd_screen, fd_action)
+    testExpected(fd_html, fd_screen, fd_action, 10, 0.97)
 }

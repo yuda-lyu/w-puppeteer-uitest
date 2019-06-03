@@ -3,6 +3,7 @@ import fs from 'fs'
 import genPm from 'wsemi/src/genPm.mjs'
 import saveB64FromScreenshot from './saveB64FromScreenshot.mjs'
 import importGetB64FromScreenshot from './importGetB64FromScreenshot.mjs'
+import imgb64Compare from './imgb64Compare.mjs'
 import saveB64 from './saveB64.mjs'
 
 
@@ -80,9 +81,10 @@ async function buildExpected(fd_src, fd_tar, fd_mod, num_web = 10) {
  * @param {String} fd_tar 輸入儲存圖案base64資料之資料夾字串
  * @param {String} fd_mod 輸入引用(import)測試html範例的ES6 Javascript檔(*.mjs)之父層相對路徑字串
  * @param {number} [num_web=10] 輸入平行啟動瀏覽器之數量，預設為10
+ * @param {number} [ratio_similar=1] 輸入偵測圖片相近度，預設為1，也就是完全相似
  * @returns {Promise} 回傳Promise，resolve為建置成功，reject為建置失敗
  */
-async function testExpected(fd_src, fd_tar, fd_mod, num_web = 10) {
+async function testExpected(fd_src, fd_tar, fd_mod, num_web = 10, ratio_similar = 1) {
 
     //mkdirSync
     if (!fs.existsSync(fd_src)) {
@@ -121,8 +123,20 @@ async function testExpected(fd_src, fd_tar, fd_mod, num_web = 10) {
         //p
         let p = genPm()
 
+        //b
+        let b
+        if (ratio_similar === 1) {
+            b = b64_now === b64_expected
+        }
+        else {
+            let r = await imgb64Compare(b64_now, b64_expected)
+            b = r >= ratio_similar
+            let s = b ? ' >= ' : '<'
+            console.log(`ratio[${r}] ${s} ratio_similar[${ratio_similar}]`)
+        }
+
         //check
-        if (b64_now === b64_expected) {
+        if (b) {
             if (!bstop) {
                 console.log('success: ' + v)
             }
