@@ -27,7 +27,7 @@
 
 <nav >
     
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="w-puppeteer-uitest.html">w-puppeteer-uitest</a><ul class='methods'><li data-type='method'><a href="w-puppeteer-uitest.html#.buildExpected">buildExpected</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.getB64">getB64</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.imgb64Compare">imgb64Compare</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.importGetB64FromScreenshot">importGetB64FromScreenshot</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.saveB64">saveB64</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.saveB64FromScreenshot">saveB64FromScreenshot</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.testExpected">testExpected</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="w-puppeteer-uitest.html">w-puppeteer-uitest</a><ul class='methods'><li data-type='method'><a href="w-puppeteer-uitest.html#.build">build</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.compareB64">compareB64</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.getB64">getB64</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.getB64FromScreenshot">getB64FromScreenshot</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.saveB64">saveB64</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.saveB64FromScreenshot">saveB64FromScreenshot</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.test">test</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -163,7 +163,7 @@
 
     
 
-    <h4 class="name" id=".buildExpected"><span class="type-signature">(async, static) </span>buildExpected<span class="signature">(fd_src, fd_tar, fd_mod, num_web<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id=".build"><span class="type-signature">(async, static) </span>build<span class="signature">(fd_src, fd_tar, fd_mod, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
 
     
 
@@ -175,7 +175,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="testScreenshot.mjs.html">testScreenshot.mjs</a>, <a href="testScreenshot.mjs.html#line40">line 40</a>
+        <a href="expectScreenshot.mjs.html">expectScreenshot.mjs</a>, <a href="expectScreenshot.mjs.html#line47">line 47</a>
     </li></ul></dd>
     
 
@@ -362,13 +362,114 @@
 
         <tr>
             
+                <td class="name"><code>opt</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>{}</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入設定物件，預設為{}</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>takeHtml</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>null</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入處理html的函數，預設為null</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
                 <td class="name"><code>num_web</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">Number</span>
 
 
             
@@ -395,6 +496,13 @@
             
 
             <td class="description last"><p>輸入平行啟動瀏覽器之數量，預設為10</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -446,6 +554,187 @@
 
     
 
+    <h4 class="name" id=".compareB64"><span class="type-signature">(async, static) </span>compareB64<span class="signature">(b64_a, b64_b)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="compareB64.mjs.html">compareB64.mjs</a>, <a href="compareB64.mjs.html#line50">line 50</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>2張圖片base64比對</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>b64_a</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>輸入圖片a的base64格式字串</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>b64_b</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>輸入圖片b的base64格式字串</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>回傳Promise，resolve為相似度0~1，reject為處理失敗</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
     <h4 class="name" id=".getB64"><span class="type-signature">(async, static) </span>getB64<span class="signature">(url, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {String}</span></h4>
 
     
@@ -458,7 +747,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="getB64.mjs.html">getB64.mjs</a>, <a href="getB64.mjs.html#line42">line 42</a>
+        <a href="getB64.mjs.html">getB64.mjs</a>, <a href="getB64.mjs.html#line43">line 43</a>
     </li></ul></dd>
     
 
@@ -1455,7 +1744,7 @@ keypress</p></td>
 
     
 
-    <h4 class="name" id=".imgb64Compare"><span class="type-signature">(async, static) </span>imgb64Compare<span class="signature">(b64_a, b64_b)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id=".getB64FromScreenshot"><span class="type-signature">(static) </span>getB64FromScreenshot<span class="signature">(url_mod, url_tar)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
 
     
 
@@ -1467,188 +1756,7 @@ keypress</p></td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="imgb64Compare.mjs.html">imgb64Compare.mjs</a>, <a href="imgb64Compare.mjs.html#line50">line 50</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>2張圖片base64比對</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>b64_a</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>輸入圖片a的base64格式字串</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>b64_b</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>輸入圖片b的base64格式字串</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>回傳Promise，resolve為相似度0~1，reject為處理失敗</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".importGetB64FromScreenshot"><span class="type-signature">(static) </span>importGetB64FromScreenshot<span class="signature">(url_mod, url_tar)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="importGetB64FromScreenshot.mjs.html">importGetB64FromScreenshot.mjs</a>, <a href="importGetB64FromScreenshot.mjs.html#line12">line 12</a>
+        <a href="getB64FromScreenshot.mjs.html">getB64FromScreenshot.mjs</a>, <a href="getB64FromScreenshot.mjs.html#line12">line 12</a>
     </li></ul></dd>
     
 
@@ -2564,7 +2672,7 @@ keypress</p></td>
 
     
 
-    <h4 class="name" id=".testExpected"><span class="type-signature">(async, static) </span>testExpected<span class="signature">(fd_src, fd_tar, fd_mod, num_web<span class="signature-attributes">opt</span>, ratio_similar<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id=".test"><span class="type-signature">(async, static) </span>test<span class="signature">(fd_src, fd_tar, fd_mod, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
 
     
 
@@ -2576,7 +2684,7 @@ keypress</p></td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="testScreenshot.mjs.html">testScreenshot.mjs</a>, <a href="testScreenshot.mjs.html#line87">line 87</a>
+        <a href="expectScreenshot.mjs.html">expectScreenshot.mjs</a>, <a href="expectScreenshot.mjs.html#line106">line 106</a>
     </li></ul></dd>
     
 
@@ -2763,13 +2871,114 @@ keypress</p></td>
 
         <tr>
             
+                <td class="name"><code>opt</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>{}</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入設定物件，預設為{}</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>takeHtml</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>null</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入處理html的函數，預設為null</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
                 <td class="name"><code>num_web</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">Number</span>
 
 
             
@@ -2808,7 +3017,7 @@ keypress</p></td>
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">Number</span>
 
 
             
@@ -2835,6 +3044,13 @@ keypress</p></td>
             
 
             <td class="description last"><p>輸入偵測圖片相近度，預設為1，也就是完全相似</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -2901,7 +3117,7 @@ keypress</p></td>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> on Tue Jun 04 2019 12:59:28 GMT+0800 (GMT+08:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> on Tue Jun 04 2019 14:55:33 GMT+0800 (GMT+08:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
