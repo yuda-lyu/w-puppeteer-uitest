@@ -33,6 +33,8 @@ import cint from 'wsemi/src/cint.mjs'
  * @param {Object} opt.action 若action.mode使用'eledbclick'，需再輸入{selector,nth(可選)}，selector為css選擇器，nth為陣列結果取第nth個dom元素
  * @param {Object} opt.action 若action.mode使用'type'，需再輸入{str}，為由當前焦點輸入文字str
  * @param {Object} opt.action 若action.mode使用'eletype'，需再輸入{selector,nth(可選),str}，selector為css選擇器，nth為陣列結果取第nth個dom元素，通過click該dom元素作為焦點輸入文字str
+ * @param {Object} opt.action 若action.mode使用'type'，需再輸入{str}，為由當前焦點輸入文字str
+ * keypress
  * @param {Integer} [opt.waitsec=5] 輸入開啟網頁後之等待時間，單位為秒，預設為5
  * @returns {String} 回傳screenshot圖片轉base64資料
  */
@@ -126,10 +128,10 @@ async function getB64(url, opt = {}) {
         }
 
         //r
-        let r = await ele.boundingBox()
-        if (!r) {
+        if (!ele.boundingBox) {
             console.log('ele.boundingBox get no result: ' + selector)
         }
+        let r = await ele.boundingBox()
         r['cx'] = r.x + r.width / 2
         r['cy'] = r.y + r.height / 2
         r['ele'] = ele
@@ -266,6 +268,11 @@ async function getB64(url, opt = {}) {
             await page.waitFor(50)
             await page.keyboard.type(v.str, { delay: 50 })
             await page.keyboard.type(String.fromCharCode(13))
+            await page.waitFor(300)
+        }
+        else if (v.mode === 'keypress') {
+            await page.waitFor(300)
+            await page.keyboard.press(v.key) //Backspace, ArrowLeft, ArrowRight, ArrowTop, ArrowBottom
             await page.waitFor(300)
         }
         else {

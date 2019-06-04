@@ -12,6 +12,14 @@ function getB64ByAction(fn) {
                 selector: '#inp',
                 str: 'abc123 中文',
             },
+            {
+                mode: 'keypress',
+                key: 'ArrowLeft',
+            },
+            {
+                mode: 'type',
+                str: '英',
+            },
             // { //使用wait 300ms可使滑鼠游標消失
             //     mode: 'wait',
             //     time: 300,

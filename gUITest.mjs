@@ -18,7 +18,7 @@ let fd_action = '../test-src/' //動態載入(dynamic import)模組之相對路�
 
 
 let mode = 'build'
-mode = ''
+//mode = ''
 if (mode === 'build') {
     buildExpected(fd_html, fd_screen, fd_action)
 }
