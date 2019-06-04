@@ -32,8 +32,9 @@ import cint from 'wsemi/src/cint.mjs'
  * @param {Object} opt.action 若action.mode使用'dbclick'，需再輸入{x1,y1}，為相對網頁內容左上角位置，單位為px
  * @param {Object} opt.action 若action.mode使用'eledbclick'，需再輸入{selector,nth(可選)}，selector為css選擇器，nth為陣列結果取第nth個dom元素
  * @param {Object} opt.action 若action.mode使用'type'，需再輸入{str}，為由當前焦點輸入文字str
- * @param {Object} opt.action 若action.mode使用'eletype'，需再輸入{selector,nth(可選),str}，selector為css選擇器，nth為陣列結果取第nth個dom元素，通過click該dom元素作為焦點輸入文字str
- * @param {Object} opt.action 若action.mode使用'type'，需再輸入{str}，為由當前焦點輸入文字str
+ * @param {Object} opt.action 若action.mode使用'eletype'，需再輸入{selector,nth(可選),str,noEnter}，selector為css選擇器，nth為陣列結果取第nth個dom元素，通過click該dom元素作為焦點輸入文字str，noEnter為輸入文字結尾不再輸入enter
+ * @param {Object} opt.action 若action.mode使用'keypress'，需再輸入{key}，為由當前焦點輸入鍵盤key值，key可用'Backspace', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'或其他keycode
+ * @param {Object} opt.action 若action.mode使用'elefocus'，需再輸入{selector,nth(可選),str}，selector為css選擇器，nth為陣列結果取第nth個dom元素，設定dom元素為當前焦點
  * keypress
  * @param {Integer} [opt.waitsec=5] 輸入開啟網頁後之等待時間，單位為秒，預設為5
  * @returns {String} 回傳screenshot圖片轉base64資料
@@ -267,12 +268,20 @@ async function getB64(url, opt = {}) {
             await r.ele.click()
             await page.waitFor(50)
             await page.keyboard.type(v.str, { delay: 50 })
-            await page.keyboard.type(String.fromCharCode(13))
+            if (!v.noEnter) {
+                await page.keyboard.type(String.fromCharCode(13))
+            }
             await page.waitFor(300)
         }
         else if (v.mode === 'keypress') {
             await page.waitFor(300)
-            await page.keyboard.press(v.key) //Backspace, ArrowLeft, ArrowRight, ArrowTop, ArrowBottom
+            await page.keyboard.press(v.key) //Backspace, ArrowLeft, ArrowRight, ArrowUp, ArrowDown
+            await page.waitFor(300)
+        }
+        else if (v.mode === 'elefocus') {
+            await page.waitFor(300)
+            let r = await getxy(v.selector, v.nth)
+            await r.ele.focus()
             await page.waitFor(300)
         }
         else {
