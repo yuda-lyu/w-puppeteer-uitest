@@ -19,7 +19,7 @@ import cint from 'wsemi/src/cint.mjs'
  * @param {Object} [opt.viewport={ width: 800, height: 600 }] 輸入網頁開啟後之viewport，預設為{ width: 800, height: 600 }
  * @param {Array} [opt.actions=[]] 輸入網頁開啟後之操作動作，預設為[]
  * @param {Object} opt.action 輸入action動作物件
- * @param {Object} opt.action.mode 動作模式字串，可選'wait','move','elemove','elehover',drag','eledrag','click','eleclick','dbclick','eledbclick','type'
+ * @param {Object} opt.action.mode 動作模式字串，可選'wait','move','elemove','elehover',drag','eledrag','click','eleclick','dbclick','eledbclick','type','eletype'
  * @param {Object} opt.action 若action.mode使用'wait'，需再輸入{time}，單位為毫秒
  * @param {Object} opt.action 若action.mode使用'resize'，需再輸入{width,height}，為網頁可視區域(viewport)的長寬，單位為整數
  * @param {Object} opt.action 若action.mode使用'move'，需再輸入{x1,y1}，為相對網頁內容左上角位置，單位為px
@@ -31,6 +31,8 @@ import cint from 'wsemi/src/cint.mjs'
  * @param {Object} opt.action 若action.mode使用'eleclick'，需再輸入{selector,nth(可選)}，selector為css選擇器，nth為陣列結果取第nth個dom元素
  * @param {Object} opt.action 若action.mode使用'dbclick'，需再輸入{x1,y1}，為相對網頁內容左上角位置，單位為px
  * @param {Object} opt.action 若action.mode使用'eledbclick'，需再輸入{selector,nth(可選)}，selector為css選擇器，nth為陣列結果取第nth個dom元素
+ * @param {Object} opt.action 若action.mode使用'type'，需再輸入{str}，為由當前焦點輸入文字str
+ * @param {Object} opt.action 若action.mode使用'eletype'，需再輸入{selector,nth(可選),str}，selector為css選擇器，nth為陣列結果取第nth個dom元素，通過click該dom元素作為焦點輸入文字str
  * @param {Integer} [opt.waitsec=5] 輸入開啟網頁後之等待時間，單位為秒，預設為5
  * @returns {String} 回傳screenshot圖片轉base64資料
  */
@@ -253,6 +255,15 @@ async function getB64(url, opt = {}) {
         }
         else if (v.mode === 'type') {
             await page.waitFor(300)
+            await page.keyboard.type(v.str, { delay: 50 })
+            await page.keyboard.type(String.fromCharCode(13))
+            await page.waitFor(300)
+        }
+        else if (v.mode === 'eletype') {
+            await page.waitFor(300)
+            let r = await getxy(v.selector, v.nth)
+            await r.ele.click()
+            await page.waitFor(50)
             await page.keyboard.type(v.str, { delay: 50 })
             await page.keyboard.type(String.fromCharCode(13))
             await page.waitFor(300)

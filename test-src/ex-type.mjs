@@ -5,12 +5,9 @@ async function getB64ByAction(fn) {
     let opt = {
         actions: [
             {
-                mode: 'eleclick',
+                mode: 'eletype',
                 selector: '#inp',
-            },
-            {
-                mode: 'type',
-                str: 'abc123',
+                str: 'abc123 中文',
             },
             // { //使用wait 300ms可使滑鼠游標消失
             //     mode: 'wait',

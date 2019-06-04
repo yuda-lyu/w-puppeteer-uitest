@@ -8,13 +8,14 @@ function getB64ByAction(fn) {
     let opt = {
         actions: [
             {
-                mode: 'eleclick',
+                mode: 'eletype',
                 selector: '#inp',
+                str: 'abc123 中文',
             },
-            {
-                mode: 'type',
-                str: 'abc123',
-            },
+            // { //使用wait 300ms可使滑鼠游標消失
+            //     mode: 'wait',
+            //     time: 300,
+            // },
         ]
     }
     return getB64(fn, opt)
