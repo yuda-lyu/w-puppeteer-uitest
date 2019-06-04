@@ -125,8 +125,12 @@ async function getB64(url, opt = {}) {
 
         //r
         let r = await ele.boundingBox()
+        if (!r) {
+            console.log('ele.boundingBox get no result: ' + selector)
+        }
         r['cx'] = r.x + r.width / 2
         r['cy'] = r.y + r.height / 2
+        r['ele'] = ele
         // let r = await page.evaluate((e) => {
         //     let { top, left, bottom, right } = e.getBoundingClientRect()
         //     return {
@@ -186,6 +190,7 @@ async function getB64(url, opt = {}) {
             await page.mouse.move(v.x2, v.y2, { steps: 50 })
             await page.waitFor(300)
             await page.mouse.up()
+            await page.waitFor(300)
         }
         else if (v.mode === 'eledrag') {
             await page.waitFor(300)
@@ -196,29 +201,61 @@ async function getB64(url, opt = {}) {
             await page.mouse.move(r.cx + v.shiftx, r.cy + v.shifty, { steps: 50 })
             await page.waitFor(300)
             await page.mouse.up()
+            await page.waitFor(300)
         }
         else if (v.mode === 'click') {
             await page.waitFor(300)
             await page.mouse.move(v.x1, v.y1)
             await page.mouse.down()
             await page.mouse.up()
+            await page.waitFor(300)
         }
+        // else if (v.mode === 'eleclickB') {
+        //     await page.waitFor(300)
+        //     await page.click(v.selector)
+        //     await page.waitFor(300)
+        // }
         else if (v.mode === 'eleclick') {
             await page.waitFor(300)
-            await page.click(v.selector)
+            let r = await getxy(v.selector, v.nth)
+            await r.ele.click()
+            // await page.mouse.move(r.cx, r.cy)
+            // await page.waitFor(50)
+            // await page.mouse.down()
+            // await page.mouse.up()
+            await page.waitFor(300)
         }
         else if (v.mode === 'dbclick') {
             await page.waitFor(300)
             await page.mouse.click(v.x1, v.y1, { clickCount: 2 })
+            await page.waitFor(300)
         }
+        // else if (v.mode === 'eledbclickB') {
+        //     await page.waitFor(300)
+        //     await page.click(v.selector, { clickCount: 2 })
+        //     await page.waitFor(300)
+        // }
         else if (v.mode === 'eledbclick') {
             await page.waitFor(300)
-            await page.click(v.selector, { clickCount: 2 })
+            let r = await getxy(v.selector, v.nth)
+            await r.ele.click({ clickCount: 2 })
+            //await page.mouse.move(r.cx, r.cy)
+            // //await page.waitFor(50)
+            // await page.mouse.down()
+            // await page.mouse.move(r.cx, r.cy)
+            // await page.mouse.up()
+            // //await page.waitFor(50)
+            // await page.mouse.move(r.cx, r.cy)
+            // await page.mouse.down()
+            // await page.mouse.move(r.cx, r.cy)
+            // await page.mouse.up()
+            await page.waitFor(300)
         }
         else if (v.mode === 'type') {
             await page.waitFor(300)
             await page.keyboard.type(v.str, { delay: 50 })
             await page.keyboard.type(String.fromCharCode(13))
+            await page.waitFor(300)
         }
         else {
             console.log('mode is unrecognized: ' + v.mode)

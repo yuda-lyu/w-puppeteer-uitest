@@ -12,7 +12,7 @@ async function getB64ByAction(fn) {
                 mode: 'type',
                 str: 'abc123',
             },
-            // { //wait使滑鼠游標消失
+            // { //使用wait 300ms可使滑鼠游標消失
             //     mode: 'wait',
             //     time: 300,
             // },
