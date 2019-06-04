@@ -1,4 +1,4 @@
-import importGetB64FromScreenshot from './importGetB64FromScreenshot.mjs'
+import getB64FromScreenshot from './getB64FromScreenshot.mjs'
 import saveB64 from './saveB64.mjs'
 
 
@@ -16,8 +16,8 @@ import saveB64 from './saveB64.mjs'
  */
 async function saveB64FromScreenshot(url, url_tar, fn_out, opt = {}) {
 
-    //importGetB64FromScreenshot
-    let b64 = await importGetB64FromScreenshot(url, url_tar)
+    //getB64FromScreenshot
+    let b64 = await getB64FromScreenshot(url, url_tar)
 
     //saveB64
     saveB64(b64, fn_out, opt)

@@ -47,11 +47,11 @@ async function b642imgdata(b64) {
  * @param {String} b64_b 輸入圖片b的base64格式字串
  * @returns {Promise} 回傳Promise，resolve為相似度0~1，reject為處理失敗
  */
-async function imgb64Compare(b64_a, b64_b) {
+async function compareB64(b64_a, b64_b) {
     let data_a = await b642imgdata(b64_a)
     let data_b = await b642imgdata(b64_b)
     return arrCompare(data_a, data_b)
 }
 
 
-export default imgb64Compare
+export default compareB64

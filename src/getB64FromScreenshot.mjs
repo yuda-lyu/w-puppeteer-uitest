@@ -9,7 +9,7 @@ import genPm from 'wsemi/src/genPm.mjs'
  * @param {String} url_tar  輸入對象(單元測試範例)網址，可為本機檔案絕對或相對位置
  * @returns {Promise} 回傳Promise，resolve回傳圖片的base64字串
  */
-function importGetB64FromScreenshot(url_mod, url_tar) {
+function getB64FromScreenshot(url_mod, url_tar) {
     let p = genPm()
 
     //dynamic import
@@ -37,4 +37,4 @@ function importGetB64FromScreenshot(url_mod, url_tar) {
 }
 
 
-export default importGetB64FromScreenshot
+export default getB64FromScreenshot

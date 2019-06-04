@@ -1,4 +1,4 @@
-import { buildExpected, testExpected } from './src/testScreenshot.mjs'
+import { build, test } from './src/expectScreenshot.mjs'
 
 
 let fd = 'D:\\開源-NodeJS-w-puppeteer-uitest\\w-puppeteer-uitest\\'
@@ -17,11 +17,15 @@ let fd_action = '../test-src/' //動態載入(dynamic import)模組之相對路�
 //各範例之單元測試, 可使用testExpected批次進行
 
 
-let mode = 'build'
-//mode = ''
-if (mode === 'build') {
-    buildExpected(fd_html, fd_screen, fd_action)
+let opt = {
+    headless: true,
+    num_web: 10,
+    ratio_similar: 0.97,
+    // takeHtml: function(vs) {
+    //     console.log(vs)
+    //     return ['ex-click.html']
+    // }
 }
-else {
-    testExpected(fd_html, fd_screen, fd_action, 10, 0.97)
-}
+//build(fd_html, fd_screen, fd_action, opt)
+test(fd_html, fd_screen, fd_action, opt)
+
