@@ -1,0 +1,6 @@
+[
+            {
+                mode: 'eleclick',
+                selector: '#btn',
+            },
+        ]

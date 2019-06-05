@@ -7,7 +7,6 @@ import isarr from 'wsemi/src/isarr.mjs'
 import isbol from 'wsemi/src/isbol.mjs'
 import iser from 'wsemi/src/iser.mjs'
 import cint from 'wsemi/src/cint.mjs'
-import { truncate } from 'fs'
 
 
 /**
@@ -46,7 +45,7 @@ async function getB64(url, opt = {}) {
     //headless
     let headless = get(opt, 'headless')
     if (!isbol(headless)) {
-        headless = truncate
+        headless = true
     }
 
 

@@ -5,91 +5,82 @@ import babel from 'rollup-plugin-babel'
 //import buble from 'rollup-plugin-buble'
 import minify from 'rollup-plugin-babel-minify'
 import fs from 'fs'
- 
- 
-let pkg=JSON.parse(fs.readFileSync('package.json', 'utf8'))
+import _ from 'lodash'
 
-let optBabel={
-      runtimeHelpers: true,
-      exclude: 'node_modules/**',
-      include: 'node_modules/wsemi/**', //need compile wsemi
-      presets: [
+
+let pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'))
+
+
+let optBabel = {
+    runtimeHelpers: true,
+    exclude: 'node_modules/**',
+    include: 'node_modules/wsemi/**', //need compile
+    presets: [
         [
-          "@babel/preset-env",
-          {
-            useBuiltIns: 'entry', //entry usage, usage is not stable
-            corejs: 3,
-          }
+            '@babel/preset-env',
+            {
+                useBuiltIns: 'entry', //entry usage, usage is not stable
+                corejs: 3,
+            }
         ]
-      ],
-      plugins: [
-        //"@babel/plugin-proposal-export-default-from",
-        //"@babel/plugin-transform-runtime"
-      ]
-    }
+    ],
+}
 
-export default [
-  {
-    input: 'src/saveB64.mjs',
-    output: {
-      banner: '/*!\n * w-puppeteer-uitest: saveB64 v' + pkg.version + '\n * (c) 2018-2019 ' + pkg.author + '\n * Released under the MIT License.\n */',
-      globals: {
-        'fs': 'fs',
-      },
-      format: 'umd',
-      name: 'w-puppeteer-uitest',
-      file: 'dist/w-puppeteer-uitest-saveB64.umd.js',
-      sourcemap: true
-    },
-    external: [
-        'fs',
-    ], 
-    plugins: [
-      commonjs(),
-      resolve({
-          preferBuiltins: false,
-          browser: true,
-      }),
-      babel(optBabel),
-      //buble(),
-      postcss({
+
+let optPlugins = [
+    //vue(),
+    commonjs(),
+    resolve({
+        preferBuiltins: false,
+        browser: true,
+    }),
+    babel(optBabel),
+    //buble(),
+    postcss({
         extensions: ['.css']
-      }),
-      minify({ comments: false, }),
-    ]
-  },
-{
-    input: 'src/getB64.mjs',
-    output: {
-      banner: '/*!\n * w-puppeteer-uitest: getB64 v' + pkg.version + '\n * (c) 2018-2019 ' + pkg.author + '\n * Released under the MIT License.\n */',
-      globals: {
-        'fs': 'fs',
-        'puppeteer': 'puppeteer',
-        'bluebird': 'bluebird',
-      },
-      format: 'umd',
-      name: 'w-puppeteer-uitest',
-      file: 'dist/w-puppeteer-uitest-getB64.umd.js',
-      sourcemap: true
-    },
-    external: [
-        'fs',
-        'puppeteer',
-        'bluebird',
-    ], 
-    plugins: [
-      commonjs(),
-      resolve({
-          preferBuiltins: false,
-          browser: true,
-      }),
-      babel(optBabel),
-      //buble(),
-      postcss({
-        extensions: ['.css']
-      }),
-      minify({ comments: false, }),
-    ]
-  }
+    }),
+    minify({ comments: false, }),
 ]
 
+
+let cps = [
+    'exp',
+    //'expBuild',
+    //'expTest',
+    //'getB64',
+    //'compareB64'
+]
+
+
+let rs = _.map(cps, function(v) {
+    let name = _.kebabCase(v)
+    let input = `src/${v}.mjs`
+    let file = `dist/${name}.umd.js`
+    let banner = `/*!\n * ${name} v${pkg.version}\n * (c) 2018-2019 ${pkg.author}\n * Released under the MIT License.\n */`
+    return {
+        input: input,
+        output: {
+            banner: banner,
+            globals: { //指定哪些外部模組的名稱，左邊為內部模組名稱，右邊為外部提供模組名稱
+                'fs': 'fs',
+                'bluebird': 'bluebird',
+                'jimp': 'jimp',
+                'puppeteer': 'puppeteer',
+            },
+            format: 'umd',
+            name: name,
+            file: file,
+            sourcemap: true
+        },
+        external: [ //指定哪些模組需視為外部模組
+            'fs',
+            'bluebird',
+            'jimp',
+            'puppeteer',
+        ],
+        plugins: optPlugins
+    }
+})
+
+
+export default rs

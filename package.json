@@ -1,6 +1,6 @@
 {
   "name": "w-puppeteer-uitest",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "A uitest package for web developer.",
   "main": "",
   "dependencies": {
@@ -34,6 +34,7 @@
     "gh-pages": "^2.0.1",
     "jsdoc": "^3.6.2",
     "jsdoc-vuejs": "^3.0.0",
+    "json5": "^2.1.0",
     "mocha": "^6.1.4",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-babel-minify": "^8.0.0",

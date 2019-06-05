@@ -1,0 +1,6 @@
+[
+            {
+                mode: 'elehover',
+                selector: '#btn',
+            },
+        ]
