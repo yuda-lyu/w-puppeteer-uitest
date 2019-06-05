@@ -1,44 +1,10 @@
 import map from 'lodash/map'
 import isFunction from 'lodash/isFunction'
 import fs from 'fs'
-import JSON5 from 'json5'
 import expBuild from './expBuild.mjs'
 import expTest from './expTest.mjs'
-
-
-/**
- * 取得資料夾內檔案，可使用havsStr過濾檔名含有之字串
- *
- * @memberOf w-puppeteer-uitest
- * @param {String} fd
- * @returns {Array} 回傳檔案名稱字串陣列
- */
-async function getFiles(fd, havsStr = '') {
-    let fsp = fs.promises
-    let ltfs = await fsp.readdir(fd)
-
-    //filter
-    if (havsStr !== '') {
-        ltfs = ltfs.filter(function (fn) {
-            return fn.indexOf(havsStr) >= 0
-        })
-    }
-
-    return ltfs
-}
-
-
-/**
- * 讀取測試動作json檔
- *
- * @memberOf w-puppeteer-uitest
- * @param {String} fn 輸入json檔案路徑字串
- * @returns {Array} 回傳動作物件陣列
- */
-function readAction(fn) {
-    let c = fs.readFileSync(fn, 'utf8')
-    return JSON5.parse(c)
-}
+import getFiles from './getFiles.mjs'
+import readJson from './readJson.mjs'
 
 
 /**
@@ -46,9 +12,10 @@ function readAction(fn) {
  *
  * @memberOf w-puppeteer-uitest
  * @param {String} fd_html 輸入html檔案所在資料夾字串
- * @param {String} fd_action 輸入html檔案所需測試動作json檔案所在資料夾字串
+ * @param {String|Function} fd_action 輸入html檔案所需測試動作json檔案所在資料夾字串，為函數時將於產生items時呼叫，針對各item需回傳操作actions物件陣列
  * @param {String} fd_out 輸入快照資料儲存之資料夾字串
  * @param {Object} [optExp={}] 輸入設定物件，預設為{}
+ * @param {Function} [optExp.htmlFilter=null] 輸入讀取html檔案過濾函數，可再用以過濾讀取fd_html內html檔案，預設為null
  * @param {Boolean} [optExp.headless=true] 輸入是否以無頭方式開啟網頁，預設為true
  * @param {Object} [optExp.viewport={ width: 800, height: 600 }] 輸入網頁開啟後之viewport，預設為{ width: 800, height: 600 }
  * @param {Number} [optExp.num_web=10] 輸入平行啟動瀏覽器之數量，預設為10
@@ -61,9 +28,11 @@ async function build(fd_html, fd_action, fd_out, optExp) {
         console.log('build: folder not exits: ', fd_html)
         return
     }
-    if (!fs.existsSync(fd_action)) {
-        console.log('build: folder not exits: ', fd_action)
-        return
+    if (!isFunction(fd_action)) {
+        if (!fs.existsSync(fd_action)) {
+            console.log('build: folder not exits: ', fd_action)
+            return
+        }
     }
 
     //fd_out mkdirSync
@@ -82,13 +51,20 @@ async function build(fd_html, fd_action, fd_out, optExp) {
     //items
     let items = map(ltfns, function(v) {
         let name = v.replace('.html', '')
-        return {
+        let item = {
             name,
-            actions: readAction(fd_action + name + '.action.json'),
+            actions: [],
             url: fd_html + v,
             fn_png: fd_out + name + '.png',
             fn_base64: fd_out + name + '.base64',
         }
+        if (isFunction(fd_action)) {
+            item.actions = fd_action(name)
+        }
+        else {
+            item.actions = readJson(fd_action + name + '.action.json')
+        }
+        return item
     })
 
     //expBuild
@@ -102,9 +78,10 @@ async function build(fd_html, fd_action, fd_out, optExp) {
  *
  * @memberOf w-puppeteer-uitest
  * @param {String} fd_html 輸入html檔案所在資料夾字串
- * @param {String} fd_action 輸入html檔案所需測試動作json檔案所在資料夾字串
+ * @param {String|Function} fd_action 輸入html檔案所需測試動作json檔案所在資料夾字串，為函數時將於產生items時呼叫，針對各item需回傳操作actions物件陣列
  * @param {String} fd_base64 輸入快照資料儲存之資料夾字串
  * @param {Object} [optExp={}] 輸入設定物件，預設為{}
+ * @param {Function} [optExp.htmlFilter=null] 輸入讀取html檔案過濾函數，可再用以過濾讀取fd_html內html檔案，預設為null
  * @param {Boolean} [optExp.headless=true] 輸入是否以無頭方式開啟網頁，預設為true
  * @param {Object} [optExp.viewport={ width: 800, height: 600 }] 輸入網頁開啟後之viewport，預設為{ width: 800, height: 600 }
  * @param {Number} [optExp.num_web=10] 輸入平行啟動瀏覽器之數量，預設為10
@@ -118,9 +95,11 @@ async function test(fd_html, fd_action, fd_base64, optExp) {
         console.log('test: folder not exits: ', fd_html)
         return
     }
-    if (!fs.existsSync(fd_action)) {
-        console.log('test: folder not exits: ', fd_action)
-        return
+    if (!isFunction(fd_action)) {
+        if (!fs.existsSync(fd_action)) {
+            console.log('build: folder not exits: ', fd_action)
+            return
+        }
     }
     if (!fs.existsSync(fd_base64)) {
         console.log('test: folder not exits: ', fd_base64)
@@ -138,13 +117,20 @@ async function test(fd_html, fd_action, fd_base64, optExp) {
     //items
     let items = map(ltfns, function(v) {
         let name = v.replace('.html', '')
-        return {
+        let item = {
             name,
-            actions: readAction(fd_action + name + '.action.json'),
+            actions: [],
             url: fd_html + v,
-            //fn_png: fd_out + name + '.png',
+            //fn_png: fd_base64 + name + '.png',
             fn_base64: fd_base64 + name + '.base64',
         }
+        if (isFunction(fd_action)) {
+            item.actions = fd_action(name)
+        }
+        else {
+            item.actions = readJson(fd_action + name + '.action.json')
+        }
+        return item
     })
 
     //expTest

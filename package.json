@@ -1,6 +1,6 @@
 {
   "name": "w-puppeteer-uitest",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "A uitest package for web developer.",
   "main": "",
   "dependencies": {

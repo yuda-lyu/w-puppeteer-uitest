@@ -1,10 +1,16 @@
 import { build, test } from './src/exp.mjs'
+import readJson from './src/readJson.mjs'
 
 
 let fd = 'D:\\開源-NodeJS-w-puppeteer-uitest\\w-puppeteer-uitest\\'
 let fd_html = fd + 'test-html\\'
 let fd_action = 'test-src\\'
 let fd_out = fd + 'test-screenshot\\'
+
+
+function readAction(name) {
+    return readJson(fd_action + name + '.action.json')
+}
 
 
 let optExp = {
@@ -18,6 +24,6 @@ let optExp = {
     //     })
     // },
 }
-//build(fd_html, fd_action, fd_out, optExp)
-test(fd_html, fd_action, fd_out, optExp)
+//build(fd_html, readAction, fd_out, optExp)
+test(fd_html, readAction, fd_out, optExp)
 
