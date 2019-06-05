@@ -27,7 +27,7 @@
 
 <nav >
     
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="w-puppeteer-uitest.html">w-puppeteer-uitest</a><ul class='methods'><li data-type='method'><a href="w-puppeteer-uitest.html#.build">build</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.compareB64">compareB64</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.getB64">getB64</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.getB64FromScreenshot">getB64FromScreenshot</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.saveB64">saveB64</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.saveB64FromScreenshot">saveB64FromScreenshot</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.test">test</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="w-puppeteer-uitest.html">w-puppeteer-uitest</a><ul class='methods'><li data-type='method'><a href="w-puppeteer-uitest.html#.build">build</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.compareB64">compareB64</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.expBuild">expBuild</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.expTest">expTest</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.getB64">getB64</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.getFiles">getFiles</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.readAction">readAction</a></li><li data-type='method'><a href="w-puppeteer-uitest.html#.test">test</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -163,7 +163,7 @@
 
     
 
-    <h4 class="name" id=".build"><span class="type-signature">(async, static) </span>build<span class="signature">(fd_src, fd_tar, fd_mod, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id=".build"><span class="type-signature">(async, static) </span>build<span class="signature">(fd_html, fd_action, fd_out, optExp<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
 
     
 
@@ -175,7 +175,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="expectScreenshot.mjs.html">expectScreenshot.mjs</a>, <a href="expectScreenshot.mjs.html#line47">line 47</a>
+        <a href="exp.mjs.html">exp.mjs</a>, <a href="exp.mjs.html#line57">line 57</a>
     </li></ul></dd>
     
 
@@ -215,7 +215,7 @@
 
 
 <div class="description">
-    <p>建置測試範例之正確版快照(screenshot)</p>
+    <p>批次建置測試範例之正確版快照(screenshot)</p>
 </div>
 
 
@@ -257,7 +257,7 @@
 
         <tr>
             
-                <td class="name"><code>fd_src</code></td>
+                <td class="name"><code>fd_html</code></td>
             
 
             <td class="type">
@@ -285,14 +285,14 @@
                 </td>
             
 
-            <td class="description last"><p>輸入html範例所在之資料夾字串</p></td>
+            <td class="description last"><p>輸入html檔案所在資料夾字串</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>fd_tar</code></td>
+                <td class="name"><code>fd_action</code></td>
             
 
             <td class="type">
@@ -320,14 +320,14 @@
                 </td>
             
 
-            <td class="description last"><p>輸入儲存圖案base64資料之資料夾字串</p></td>
+            <td class="description last"><p>輸入html檔案所需測試動作json檔案所在資料夾字串</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>fd_mod</code></td>
+                <td class="name"><code>fd_out</code></td>
             
 
             <td class="type">
@@ -355,14 +355,14 @@
                 </td>
             
 
-            <td class="description last"><p>輸入引用(import)測試html範例的ES6 Javascript檔(*.mjs)之父層相對路徑字串</p></td>
+            <td class="description last"><p>輸入快照資料儲存之資料夾字串</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>opt</code></td>
+                <td class="name"><code>optExp</code></td>
             
 
             <td class="type">
@@ -424,13 +424,13 @@
 
         <tr>
             
-                <td class="name"><code>takeHtml</code></td>
+                <td class="name"><code>headless</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">function</span>
+<span class="param-type">Boolean</span>
 
 
             
@@ -451,12 +451,51 @@
             
                 <td class="default">
                 
-                    <code>null</code>
+                    <code>true</code>
                 
                 </td>
             
 
-            <td class="description last"><p>輸入處理html的函數，預設為null</p></td>
+            <td class="description last"><p>輸入是否以無頭方式開啟網頁，預設為true</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>viewport</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>{ width: 800, height: 600 }</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入網頁開啟後之viewport，預設為{ width: 800, height: 600 }</p></td>
         </tr>
 
     
@@ -528,7 +567,7 @@
 
         
 <div class="param-desc">
-    <p>回傳Promise，resolve為建置成功，reject為建置失敗</p>
+    <p>回傳Promise，resolve為建置成功，reject為建置失敗item名稱</p>
 </div>
 
 
@@ -735,6 +774,1080 @@
 
     
 
+    <h4 class="name" id=".expBuild"><span class="type-signature">(async, static) </span>expBuild<span class="signature">(items, optExp<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="expBuild.mjs.html">expBuild.mjs</a>, <a href="expBuild.mjs.html#line25">line 25</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>建置測試範例之正確版快照(screenshot)</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>items</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入html範例所在之資料夾字串</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>item.name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入item名稱字串</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>item.url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入item所需瀏覽範例位置字串</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>item.actions</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入item所需執行自動化操作動作陣列</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>item.fn_png</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入item儲存png圖之路徑字串</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>item.fn_base64</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入item儲存圖base64資料之路徑字串</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>optExp</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>{}</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入設定物件，預設為{}</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>headless</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>true</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入是否以無頭方式開啟網頁，預設為true</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>viewport</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>{ width: 800, height: 600 }</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入網頁開啟後之viewport，預設為{ width: 800, height: 600 }</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>num_web</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>10</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入平行啟動瀏覽器之數量，預設為10</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>回傳Promise，resolve為建置成功，reject為建置失敗item名稱</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".expTest"><span class="type-signature">(async, static) </span>expTest<span class="signature">(items, optExp<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="expTest.mjs.html">expTest.mjs</a>, <a href="expTest.mjs.html#line28">line 28</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>測試範例之快照(screenshot)是否與正確版相同</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>items</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入html範例所在之資料夾字串</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>item.name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入item名稱字串</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>item.url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入item所需瀏覽範例位置字串</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>item.actions</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入item所需執行自動化操作動作陣列</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>item.fn_base64</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入item儲存圖base64資料之路徑字串</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>optExp</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>{}</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入設定物件，預設為{}</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>headless</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>true</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入是否以無頭方式開啟網頁，預設為true</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>viewport</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>{ width: 800, height: 600 }</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入網頁開啟後之viewport，預設為{ width: 800, height: 600 }</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>num_web</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>10</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入平行啟動瀏覽器之數量，預設為10</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ratio_similar</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>1</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入偵測圖片相近度，預設為1，也就是完全相似</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>回傳Promise，resolve為建置成功，reject為建置失敗item名稱</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
     <h4 class="name" id=".getB64"><span class="type-signature">(async, static) </span>getB64<span class="signature">(url, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {String}</span></h4>
 
     
@@ -747,7 +1860,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="getB64.mjs.html">getB64.mjs</a>, <a href="getB64.mjs.html#line43">line 43</a>
+        <a href="getB64.mjs.html">getB64.mjs</a>, <a href="getB64.mjs.html#line42">line 42</a>
     </li></ul></dd>
     
 
@@ -1744,7 +2857,7 @@ keypress</p></td>
 
     
 
-    <h4 class="name" id=".getB64FromScreenshot"><span class="type-signature">(static) </span>getB64FromScreenshot<span class="signature">(url_mod, url_tar)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id=".getFiles"><span class="type-signature">(async, static) </span>getFiles<span class="signature">(fd)</span><span class="type-signature"> &rarr; {Array}</span></h4>
 
     
 
@@ -1756,7 +2869,7 @@ keypress</p></td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="getB64FromScreenshot.mjs.html">getB64FromScreenshot.mjs</a>, <a href="getB64FromScreenshot.mjs.html#line12">line 12</a>
+        <a href="exp.mjs.html">exp.mjs</a>, <a href="exp.mjs.html#line16">line 16</a>
     </li></ul></dd>
     
 
@@ -1796,7 +2909,7 @@ keypress</p></td>
 
 
 <div class="description">
-    <p>動態載入(dynamic import)測試檔案，並自動呼叫其內default的函數(getb64)</p>
+    <p>取得資料夾內檔案，可使用havsStr過濾檔名含有之字串</p>
 </div>
 
 
@@ -1834,7 +2947,7 @@ keypress</p></td>
 
         <tr>
             
-                <td class="name"><code>url_mod</code></td>
+                <td class="name"><code>fd</code></td>
             
 
             <td class="type">
@@ -1850,30 +2963,7 @@ keypress</p></td>
 
             
 
-            <td class="description last"><p>輸入匯入模組網址，可為本機檔案絕對或相對位置</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>url_tar</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>輸入對象(單元測試範例)網址，可為本機檔案絕對或相對位置</p></td>
+            <td class="description last"></td>
         </tr>
 
     
@@ -1899,7 +2989,7 @@ keypress</p></td>
 
         
 <div class="param-desc">
-    <p>回傳Promise，resolve回傳圖片的base64字串</p>
+    <p>回傳檔案名稱字串陣列</p>
 </div>
 
 
@@ -1910,7 +3000,7 @@ keypress</p></td>
     </dt>
     <dd>
         
-<span class="param-type">Promise</span>
+<span class="param-type">Array</span>
 
 
     </dd>
@@ -1925,7 +3015,7 @@ keypress</p></td>
 
     
 
-    <h4 class="name" id=".saveB64"><span class="type-signature">(static) </span>saveB64<span class="signature">(b64, fn_out, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id=".readAction"><span class="type-signature">(static) </span>readAction<span class="signature">(fn)</span><span class="type-signature"> &rarr; {Array}</span></h4>
 
     
 
@@ -1937,7 +3027,7 @@ keypress</p></td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="saveB64.mjs.html">saveB64.mjs</a>, <a href="saveB64.mjs.html#line17">line 17</a>
+        <a href="exp.mjs.html">exp.mjs</a>, <a href="exp.mjs.html#line38">line 38</a>
     </li></ul></dd>
     
 
@@ -1977,7 +3067,7 @@ keypress</p></td>
 
 
 <div class="description">
-    <p>圖片base64格式字串儲存至檔案</p>
+    <p>讀取測試動作json檔</p>
 </div>
 
 
@@ -2003,11 +3093,7 @@ keypress</p></td>
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
-        
-        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -2019,7 +3105,7 @@ keypress</p></td>
 
         <tr>
             
-                <td class="name"><code>b64</code></td>
+                <td class="name"><code>fn</code></td>
             
 
             <td class="type">
@@ -2032,204 +3118,10 @@ keypress</p></td>
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
 
             
-                <td class="default">
-                
-                </td>
-            
 
-            <td class="description last"><p>輸入圖片base64格式字串</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>fn_out</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>輸入儲存之檔案路徑，但需不包含副檔名，因由設定檔決定輸出檔案之副檔名</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>opt</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>{}</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>輸入設定檔，預設為{}</p>
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>png</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>true</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>輸入是否輸出png圖，預設為true</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>base64</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>true</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>輸入是否輸出base64資料，預設為true</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
+            <td class="description last"><p>輸入json檔案路徑字串</p></td>
         </tr>
 
     
@@ -2255,7 +3147,7 @@ keypress</p></td>
 
         
 <div class="param-desc">
-    <p>回傳Promise，resolve為依照設定處理完畢，reject為處理失敗</p>
+    <p>回傳動作物件陣列</p>
 </div>
 
 
@@ -2266,7 +3158,7 @@ keypress</p></td>
     </dt>
     <dd>
         
-<span class="param-type">Promise</span>
+<span class="param-type">Array</span>
 
 
     </dd>
@@ -2281,7 +3173,7 @@ keypress</p></td>
 
     
 
-    <h4 class="name" id=".saveB64FromScreenshot"><span class="type-signature">(async, static) </span>saveB64FromScreenshot<span class="signature">(url, url_tar, fn_out, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id=".test"><span class="type-signature">(async, static) </span>test<span class="signature">(fd_html, fd_action, fd_base64, optExp<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
 
     
 
@@ -2293,7 +3185,7 @@ keypress</p></td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="saveB64FromScreenshot.mjs.html">saveB64FromScreenshot.mjs</a>, <a href="saveB64FromScreenshot.mjs.html#line17">line 17</a>
+        <a href="exp.mjs.html">exp.mjs</a>, <a href="exp.mjs.html#line114">line 114</a>
     </li></ul></dd>
     
 
@@ -2333,7 +3225,7 @@ keypress</p></td>
 
 
 <div class="description">
-    <p>瀏覽網址並用screenshot取得圖片base64資料，並依照設定儲存</p>
+    <p>批次測試範例之快照(screenshot)是否與正確版相同</p>
 </div>
 
 
@@ -2375,7 +3267,7 @@ keypress</p></td>
 
         <tr>
             
-                <td class="name"><code>url</code></td>
+                <td class="name"><code>fd_html</code></td>
             
 
             <td class="type">
@@ -2403,14 +3295,14 @@ keypress</p></td>
                 </td>
             
 
-            <td class="description last"><p>輸入瀏覽網址，可為本機檔案絕對或相對位置</p></td>
+            <td class="description last"><p>輸入html檔案所在資料夾字串</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>url_tar</code></td>
+                <td class="name"><code>fd_action</code></td>
             
 
             <td class="type">
@@ -2438,14 +3330,14 @@ keypress</p></td>
                 </td>
             
 
-            <td class="description last"><p>輸入對象(單元測試範例)網址，可為本機檔案絕對或相對位置</p></td>
+            <td class="description last"><p>輸入html檔案所需測試動作json檔案所在資料夾字串</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>fn_out</code></td>
+                <td class="name"><code>fd_base64</code></td>
             
 
             <td class="type">
@@ -2473,405 +3365,14 @@ keypress</p></td>
                 </td>
             
 
-            <td class="description last"><p>輸入儲存之檔案路徑，但需不包含副檔名，因由設定檔決定輸出檔案之副檔名</p></td>
+            <td class="description last"><p>輸入快照資料儲存之資料夾字串</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>opt</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>{}</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>輸入設定檔，預設為{}</p>
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>png</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>true</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>輸入是否輸出png圖，預設為true</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>base64</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>true</code>
-                
-                </td>
-            
-
-            <td class="description last"><p>輸入是否輸出base64資料，預設為true</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>回傳Promise，resolve為依照設定處理完畢，reject為處理失敗</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".test"><span class="type-signature">(async, static) </span>test<span class="signature">(fd_src, fd_tar, fd_mod, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="expectScreenshot.mjs.html">expectScreenshot.mjs</a>, <a href="expectScreenshot.mjs.html#line106">line 106</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description">
-    <p>測試範例之快照(screenshot)是否與正確版相同</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>fd_src</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>輸入html範例所在之資料夾字串</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>fd_tar</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>輸入儲存圖案base64資料之資料夾字串</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>fd_mod</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last"><p>輸入引用(import)測試html範例的ES6 Javascript檔(*.mjs)之父層相對路徑字串</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>opt</code></td>
+                <td class="name"><code>optExp</code></td>
             
 
             <td class="type">
@@ -2933,13 +3434,13 @@ keypress</p></td>
 
         <tr>
             
-                <td class="name"><code>takeHtml</code></td>
+                <td class="name"><code>headless</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">function</span>
+<span class="param-type">Boolean</span>
 
 
             
@@ -2960,12 +3461,51 @@ keypress</p></td>
             
                 <td class="default">
                 
-                    <code>null</code>
+                    <code>true</code>
                 
                 </td>
             
 
-            <td class="description last"><p>輸入處理html的函數，預設為null</p></td>
+            <td class="description last"><p>輸入是否以無頭方式開啟網頁，預設為true</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>viewport</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>{ width: 800, height: 600 }</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>輸入網頁開啟後之viewport，預設為{ width: 800, height: 600 }</p></td>
         </tr>
 
     
@@ -3076,7 +3616,7 @@ keypress</p></td>
 
         
 <div class="param-desc">
-    <p>回傳Promise，resolve為建置成功，reject為建置失敗</p>
+    <p>回傳Promise，resolve為建置成功，reject為建置失敗item名稱</p>
 </div>
 
 
@@ -3117,7 +3657,7 @@ keypress</p></td>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> on Tue Jun 04 2019 15:50:40 GMT+0800 (GMT+08:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> on Wed Jun 05 2019 12:43:03 GMT+0800 (GMT+08:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
