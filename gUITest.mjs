@@ -2,9 +2,9 @@ import { build, test } from './src/exp.mjs'
 import readJson from './src/readJson.mjs'
 
 
-let fd = 'D:\\開源-NodeJS-w-puppeteer-uitest\\w-puppeteer-uitest\\'
+let fd = 'D:\\開源-Javascript-w-puppeteer-uitest\\w-puppeteer-uitest\\'
 let fd_html = fd + 'test-html\\'
-let fd_action = 'test-src\\'
+let fd_action = fd + 'test-action\\'
 let fd_out = fd + 'test-screenshot\\'
 
 
