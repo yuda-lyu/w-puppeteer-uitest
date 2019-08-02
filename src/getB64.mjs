@@ -135,11 +135,19 @@ async function getB64(url, opt = {}) {
             }
         }
 
-        //r
-        if (!ele.boundingBox) {
-            console.log('ele.boundingBox get no result: ' + selector)
+        //check
+        if (iser(ele)) {
+            console.log('invalid ele: ' + selector)
             return null
         }
+
+        //check
+        if (!ele.boundingBox) {
+            console.log('invalid ele.boundingBox: ' + selector)
+            return null
+        }
+
+        //r
         let r = await ele.boundingBox()
         r['cx'] = r.x + r.width / 2
         r['cy'] = r.y + r.height / 2
