@@ -23,18 +23,18 @@ import cint from 'wsemi/src/cint.mjs'
  * @param {Object} opt.action 若action.mode使用'wait'，需再輸入{time}，單位為毫秒
  * @param {Object} opt.action 若action.mode使用'resize'，需再輸入{width,height}，為網頁可視區域(viewport)的長寬，單位為整數
  * @param {Object} opt.action 若action.mode使用'move'，需再輸入{x1,y1}，為相對網頁內容左上角位置，單位為px
- * @param {Object} opt.action 若action.mode使用'elemove'，需再輸入{selector,nth(可選)}，selector為css選擇器，nth為陣列結果取第nth個dom元素
+ * @param {Object} opt.action 若action.mode使用'elemove'，需再輸入{selector,nth(可選)}，selector為css選擇器，nth為陣列結果取第nth個dom元素，負值代表由最末往前選(-nth)個dom元素
  * @param {Object} opt.action 若action.mode使用'elehover'，需再輸入{selector}，selector為css選擇器，若有超過1個結果則取第1個dom元素
  * @param {Object} opt.action 若action.mode使用'drag'，需再輸入{x1,y1,x2,y2}，由(x1,y1)拖曳至(x2,y2)，為相對網頁內容左上角位置，單位為px
- * @param {Object} opt.action 若action.mode使用'eledrag'，需再輸入{selector,nth(可選),shiftx,shifty}，由元素中心拖曳平移(shiftx,shifty)，selector為css選擇器，nth為陣列結果取第nth個dom元素，shiftx,shifty單位為px
+ * @param {Object} opt.action 若action.mode使用'eledrag'，需再輸入{selector,nth(可選),shiftx,shifty}，由元素中心拖曳平移(shiftx,shifty)，selector為css選擇器，nth為陣列結果取第nth個dom元素，負值代表由最末往前選(-nth)個dom元素，shiftx,shifty單位為px
  * @param {Object} opt.action 若action.mode使用'click'，需再輸入{x1,y1}，為相對網頁內容左上角位置，單位為px
- * @param {Object} opt.action 若action.mode使用'eleclick'，需再輸入{selector,nth(可選)}，selector為css選擇器，nth為陣列結果取第nth個dom元素
+ * @param {Object} opt.action 若action.mode使用'eleclick'，需再輸入{selector,nth(可選)}，selector為css選擇器，nth為陣列結果取第nth個dom元素，負值代表由最末往前選(-nth)個dom元素
  * @param {Object} opt.action 若action.mode使用'dbclick'，需再輸入{x1,y1}，為相對網頁內容左上角位置，單位為px
- * @param {Object} opt.action 若action.mode使用'eledbclick'，需再輸入{selector,nth(可選)}，selector為css選擇器，nth為陣列結果取第nth個dom元素
+ * @param {Object} opt.action 若action.mode使用'eledbclick'，需再輸入{selector,nth(可選)}，selector為css選擇器，nth為陣列結果取第nth個dom元素，負值代表由最末往前選(-nth)個dom元素
  * @param {Object} opt.action 若action.mode使用'type'，需再輸入{str,noEnter(可選)}，為由當前焦點輸入文字str，noEnter為輸入文字結尾不再輸入enter
- * @param {Object} opt.action 若action.mode使用'eletype'，需再輸入{selector,nth(可選),str,noEnter(可選)}，selector為css選擇器，nth為陣列結果取第nth個dom元素，通過click該dom元素作為焦點輸入文字str，noEnter為輸入文字結尾不再輸入enter
+ * @param {Object} opt.action 若action.mode使用'eletype'，需再輸入{selector,nth(可選),str,noEnter(可選)}，selector為css選擇器，nth為陣列結果取第nth個dom元素，負值代表由最末往前選(-nth)個dom元素，通過click該dom元素作為焦點輸入文字str，noEnter為輸入文字結尾不再輸入enter
  * @param {Object} opt.action 若action.mode使用'keypress'，需再輸入{key}，為由當前焦點輸入鍵盤key值，key可用'Backspace', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'或其他keycode
- * @param {Object} opt.action 若action.mode使用'elefocus'，需再輸入{selector,nth(可選),str}，selector為css選擇器，nth為陣列結果取第nth個dom元素，設定dom元素為當前焦點
+ * @param {Object} opt.action 若action.mode使用'elefocus'，需再輸入{selector,nth(可選),str}，selector為css選擇器，nth為陣列結果取第nth個dom元素，負值代表由最末往前選(-nth)個dom元素，設定dom元素為當前焦點
  * keypress
  * @param {Integer} [opt.waitsec=5] 輸入開啟網頁後之等待時間，單位為秒，預設為5
  * @returns {String} 回傳screenshot圖片轉base64資料
@@ -127,7 +127,12 @@ async function getB64(url, opt = {}) {
                 console.log('page.$$ get no result: ' + selector)
                 return null
             }
-            ele = eles[n]
+            if (n < 0) {
+                ele = eles[eles.length + n]
+            }
+            else {
+                ele = eles[n]
+            }
         }
 
         //r
