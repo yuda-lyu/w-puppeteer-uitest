@@ -33,7 +33,7 @@ import cint from 'wsemi/src/cint.mjs'
  * @param {Object} opt.action 若action.mode使用'eledbclick'，需再輸入{selector,nth(可選)}，selector為css選擇器，nth為陣列結果取第nth個dom元素，預設為0，負值代表由最末往前選(-nth)個dom元素
  * @param {Object} opt.action 若action.mode使用'type'，需再輸入{str,noEnter(可選)}，為由當前焦點輸入文字str，noEnter為輸入文字結尾不再輸入enter，預設為true
  * @param {Object} opt.action 若action.mode使用'eletype'，需再輸入{selector,nth(可選),str,noEnter(可選)}，selector為css選擇器，nth為陣列結果取第nth個dom元素，預設為0，負值代表由最末往前選(-nth)個dom元素，通過click該dom元素作為焦點輸入文字str，noEnter為輸入文字結尾不再輸入enter，預設為true
- * @param {Object} opt.action 若action.mode使用'keypress'，需再輸入{key,count(可選)}，為由當前焦點輸入鍵盤key值，key可用'Backspace', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'或其他keycode，count為觸發次數，預設為1次
+ * @param {Object} opt.action 若action.mode使用'keypress'，需再輸入{key,count(可選)}，為由當前焦點輸入鍵盤key值，key可用'Backspace', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'或其他keycode，count為觸發次數，預設為1次，keypress可用key詳見[https://github.com/GoogleChrome/puppeteer/blob/v1.19.0/lib/USKeyboardLayout.js]
  * @param {Object} opt.action 若action.mode使用'elefocus'，需再輸入{selector,nth(可選),str}，selector為css選擇器，nth為陣列結果取第nth個dom元素，預設為0，負值代表由最末往前選(-nth)個dom元素，設定dom元素為當前焦點
  * keypress
  * @param {Integer} [opt.waitsec=5] 輸入開啟網頁後之等待時間，單位為秒，預設為5
@@ -142,7 +142,7 @@ async function getB64(url, opt = {}) {
         }
 
         //check
-        if (!ele.boundingBox) {
+        if (iser(ele.boundingBox)) {
             console.log('invalid ele.boundingBox: ' + selector)
             return null
         }
