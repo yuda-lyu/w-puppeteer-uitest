@@ -1,6 +1,6 @@
 {
   "name": "w-puppeteer-uitest",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "A uitest package for web developer.",
   "main": "",
   "dependencies": {
@@ -8,7 +8,7 @@
     "jimp": "^0.6.4",
     "lodash": "^4.17.15",
     "puppeteer": "^1.19.0",
-    "wsemi": "^1.2.19"
+    "wsemi": "^1.2.21"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
