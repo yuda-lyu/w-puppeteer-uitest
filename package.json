@@ -1,6 +1,6 @@
 {
   "name": "w-puppeteer-uitest",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "A uitest package for web developer.",
   "main": "",
   "dependencies": {
@@ -8,7 +8,7 @@
     "jimp": "^0.6.4",
     "lodash": "^4.17.15",
     "puppeteer": "^1.19.0",
-    "wsemi": "^1.2.23"
+    "wsemi": "^1.2.25"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -23,7 +23,7 @@
     "core-js": "^3.2.1",
     "docdash": "^1.1.1",
     "eslint": "^6.2.2",
-    "eslint-config-standard": "^14.0.1",
+    "eslint-config-standard": "^14.1.0",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^3.0.0",
     "eslint-plugin-import": "^2.18.2",
