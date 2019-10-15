@@ -1,6 +1,7 @@
 /*!
- * readJson v1.0.26
+ * readJson v1.0.27
  * (c) 2018-2019 yuda-lyu(semisphere)
  * Released under the MIT License.
- */(function(a,b){"object"==typeof exports&&"undefined"!=typeof module?module.exports=b(require("fs"),require("json5")):"function"==typeof define&&define.amd?define(["fs","json5"],b):(a=a||self,a.readJson=b(a.fs,a.json5))})(this,function(a,b){'use strict';function c(d){var e=a.readFileSync(d,"utf8");return b.parse(e)}return a=a&&a.hasOwnProperty("default")?a["default"]:a,b=b&&b.hasOwnProperty("default")?b["default"]:b,c});
+ */
+!function(e,n){"object"==typeof exports&&"undefined"!=typeof module?module.exports=n(require("fs"),require("json5")):"function"==typeof define&&define.amd?define(["fs","json5"],n):(e=e||self).readJson=n(e.fs,e.json5)}(this,(function(e,n){"use strict";return e=e&&e.hasOwnProperty("default")?e.default:e,n=n&&n.hasOwnProperty("default")?n.default:n,function(t){var f=e.readFileSync(t,"utf8");return n.parse(f)}}));
 //# sourceMappingURL=readJson.umd.js.map
