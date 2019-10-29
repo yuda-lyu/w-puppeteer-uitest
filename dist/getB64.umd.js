@@ -1,5 +1,5 @@
 /*!
- * getB64 v1.0.27
+ * getB64 v1.0.28
  * (c) 2018-2019 yuda-lyu(semisphere)
  * Released under the MIT License.
  */
