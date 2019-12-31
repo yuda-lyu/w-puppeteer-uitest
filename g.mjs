@@ -2,7 +2,7 @@ import { build, test } from './src/exp.mjs'
 import readJson from './src/readJson.mjs'
 
 
-let fd = 'D:\\開源-Javascript-w-puppeteer-uitest\\w-puppeteer-uitest\\'
+let fd = 'D:\\開源-JS-003-2-w-puppeteer-uitest\\w-puppeteer-uitest\\'
 let fd_html = fd + 'test-html\\'
 let fd_action = fd + 'test-action\\'
 let fd_out = fd + 'test-screenshot\\'
@@ -27,3 +27,4 @@ let optExp = {
 //build(fd_html, readAction, fd_out, optExp)
 test(fd_html, readAction, fd_out, optExp)
 
+//node --experimental-modules --es-module-specifier-resolution=node g.mjs

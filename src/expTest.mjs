@@ -1,5 +1,5 @@
 import get from 'lodash/get'
-import b from 'bluebird'
+import bb from 'bluebird'
 import fs from 'fs'
 import ispint from 'wsemi/src/ispint.mjs'
 import isnum from 'wsemi/src/isnum.mjs'
@@ -42,7 +42,7 @@ async function expTest(items, optExp = {}) {
 
     //mapSeries 循序, map 平行化處理
     let bstop = false //若使用map平行化時, 多執行序啟動瀏覽器有錯誤會先reject, 但其他已啟動的瀏覽器一樣仍於閉包內會完成該任務, 故會呼叫所屬console.log, 通過bstop來停止這種情況之輸出
-    return b.map(items, async function (v) {
+    return bb.map(items, async function (v) {
         console.log('expTest: ' + v.name)
 
         //opt
