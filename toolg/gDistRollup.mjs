@@ -17,14 +17,12 @@ rollupFiles({
     //nameDistType: 'kebabCase',
     globals: {
         'fs': 'fs',
-        'bluebird': 'bluebird',
         'jimp': 'jimp',
         'puppeteer': 'puppeteer',
         'json5': 'json5',
     },
     external: [
         'fs',
-        'bluebird',
         'jimp',
         'puppeteer',
         'json5',

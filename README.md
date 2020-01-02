@@ -13,7 +13,7 @@ To view documentation or get support, visit [docs](https://yuda-lyu.github.io/w-
 
 ## Installation
 ### Using npm(ES6 module):
-> **Note:** w-puppeteer-uitest depends on `puppeteer`, `jimp`, `lodash`, `bluebird`, `wsemi`
+> **Note:** w-puppeteer-uitest depends on `puppeteer`, `jimp`, `lodash`, `wsemi`
 ```alias
 npm i w-puppeteer-uitest
 ```

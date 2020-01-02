@@ -1,10 +1,10 @@
 import get from 'lodash/get'
-import bb from 'bluebird'
 import fs from 'fs'
 import ispint from 'wsemi/src/ispint.mjs'
 import isnum from 'wsemi/src/isnum.mjs'
 import cint from 'wsemi/src/cint.mjs'
 import cdbl from 'wsemi/src/cdbl.mjs'
+import pmMap from 'wsemi/src/pmMap.mjs'
 import getB64 from './getB64.mjs'
 import compareB64 from './compareB64.mjs'
 
@@ -40,9 +40,9 @@ async function expTest(items, optExp = {}) {
         ratio_similar = cdbl(optExp.ratio_similar)
     }
 
-    //mapSeries 循序, map 平行化處理
+    //pmMap, 平行化處理
     let bstop = false //若使用map平行化時, 多執行序啟動瀏覽器有錯誤會先reject, 但其他已啟動的瀏覽器一樣仍於閉包內會完成該任務, 故會呼叫所屬console.log, 通過bstop來停止這種情況之輸出
-    return bb.map(items, async function (v) {
+    return pmMap(items, async function (v) {
         console.log('expTest: ' + v.name)
 
         //opt
@@ -87,7 +87,7 @@ async function expTest(items, optExp = {}) {
         }
 
         return v.name
-    }, { concurrency: num_web })
+    }, num_web)
         .then(() => {
             console.log('\x1b[32m%s\x1b[0m', 'expTest success')
         })

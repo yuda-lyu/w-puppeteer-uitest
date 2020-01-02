@@ -1,5 +1,5 @@
 /*!
- * compareB64 v1.0.30
+ * compareB64 v1.0.31
  * (c) 2018-2019 yuda-lyu(semisphere)
  * Released under the MIT License.
  */

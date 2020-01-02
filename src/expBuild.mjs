@@ -1,8 +1,8 @@
 import get from 'lodash/get'
-import b from 'bluebird'
 import fs from 'fs'
 import ispint from 'wsemi/src/ispint.mjs'
 import cint from 'wsemi/src/cint.mjs'
+import pmMap from 'wsemi/src/pmMap.mjs'
 import getB64 from './getB64.mjs'
 
 
@@ -33,8 +33,8 @@ async function expBuild(items, optExp = {}) {
         num_web = cint(optExp.num_web)
     }
 
-    //mapSeries 循序, map 平行化處理
-    return b.map(items, async function (v) {
+    //pmMap, 平行化處理
+    return pmMap(items, async function (v) {
         console.log('expBuild: ' + v.name)
 
         //opt
@@ -57,7 +57,7 @@ async function expBuild(items, optExp = {}) {
         }
 
         console.log('success: ' + v.name)
-    }, { concurrency: num_web })
+    }, num_web)
         .then(() => {
             console.log('\x1b[32m%s\x1b[0m', 'expBuild success')
         })
