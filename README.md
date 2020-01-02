@@ -17,3 +17,35 @@ To view documentation or get support, visit [docs](https://yuda-lyu.github.io/w-
 ```alias
 npm i w-puppeteer-uitest
 ```
+
+#### Example
+> **Link:** [[dev source code](https://github.com/yuda-lyu/w-puppeteer-uitest/blob/master/scla.mjs)]
+```alias
+import { build, test } from './src/exp.mjs'
+import readJson from './src/readJson.mjs'
+
+let fd = 'D:\\開源-JS-003-2-w-puppeteer-uitest\\w-puppeteer-uitest\\'
+let fd_html = fd + 'test-html\\'
+let fd_action = fd + 'test-action\\'
+let fd_out = fd + 'test-screenshot\\'
+
+function readAction(name) {
+    return readJson(fd_action + name + '.action.json')
+}
+
+let optExp = {
+    headless: true,
+    num_web: 10,
+    ratio_similar: 0.97,
+    // htmlFilter: function(vs) {
+    //     console.log(vs)
+    //     return vs.filter(function(v) {
+    //         return v.indexOf('hover') >= 0
+    //     })
+    // },
+}
+
+//build(fd_html, readAction, fd_out, optExp)
+test(fd_html, readAction, fd_out, optExp)
+
+```

@@ -27,4 +27,4 @@ let optExp = {
 //build(fd_html, readAction, fd_out, optExp)
 test(fd_html, readAction, fd_out, optExp)
 
-//node --experimental-modules --es-module-specifier-resolution=node g.mjs
+//node --experimental-modules --es-module-specifier-resolution=node scla.mjs
