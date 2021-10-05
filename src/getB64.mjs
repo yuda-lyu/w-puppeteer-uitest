@@ -1,5 +1,4 @@
 import get from 'lodash/get'
-import puppeteer from 'puppeteer'
 import isint from 'wsemi/src/isint.mjs'
 import isobj from 'wsemi/src/isobj.mjs'
 import isarr from 'wsemi/src/isarr.mjs'
@@ -7,6 +6,7 @@ import isbol from 'wsemi/src/isbol.mjs'
 import iser from 'wsemi/src/iser.mjs'
 import cint from 'wsemi/src/cint.mjs'
 import pmSeries from 'wsemi/src/pmSeries.mjs'
+import puppeteer from 'puppeteer'
 
 
 /**

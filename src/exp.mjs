@@ -1,6 +1,6 @@
+import fs from 'fs'
 import map from 'lodash/map'
 import isFunction from 'lodash/isFunction'
-import fs from 'fs'
 import expBuild from './expBuild.mjs'
 import expTest from './expTest.mjs'
 import getFiles from './getFiles.mjs'

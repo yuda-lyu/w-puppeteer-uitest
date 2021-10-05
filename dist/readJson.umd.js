@@ -1,7 +1,7 @@
 /*!
- * readJson v1.0.33
- * (c) 2018-2019 yuda-lyu(semisphere)
+ * readJson v1.0.34
+ * (c) 2018-2021 yuda-lyu(semisphere)
  * Released under the MIT License.
  */
-!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t(require("fs"),require("json5")):"function"==typeof define&&define.amd?define(["fs","json5"],t):(e=e||self).readJson=t(e.fs,e.json5)}(this,(function(e,t){"use strict";return e=e&&Object.prototype.hasOwnProperty.call(e,"default")?e.default:e,t=t&&Object.prototype.hasOwnProperty.call(t,"default")?t.default:t,function(n){var o=e.readFileSync(n,"utf8");return t.parse(o)}}));
+!function(e,n){"object"==typeof exports&&"undefined"!=typeof module?module.exports=n(require("fs"),require("json5")):"function"==typeof define&&define.amd?define(["fs","json5"],n):(e="undefined"!=typeof globalThis?globalThis:e||self).readJson=n(e.fs,e.json5)}(this,(function(e,n){"use strict";function t(e){return e&&"object"==typeof e&&"default"in e?e:{default:e}}var f=t(e),o=t(n);return function(e){var n=f.default.readFileSync(e,"utf8");return o.default.parse(n)}}));
 //# sourceMappingURL=readJson.umd.js.map
