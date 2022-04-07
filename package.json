@@ -1,17 +1,17 @@
 {
   "name": "w-puppeteer-uitest",
-  "version": "1.0.35",
+  "version": "1.0.36",
   "description": "A uitest package for web developer.",
   "main": "",
   "dependencies": {
     "lodash": "^4.17.21",
-    "json5": "^2.2.0",
+    "json5": "^2.2.1",
     "jimp": "^0.16.1",
-    "puppeteer": "^10.4.0",
-    "wsemi": "^1.6.34"
+    "puppeteer": "^13.5.2",
+    "wsemi": "^1.6.54"
   },
   "devDependencies": {
-    "w-package-tools": "^1.0.59"
+    "w-package-tools": "^1.0.65"
   },
   "scripts": {
     "test": "mocha --parallel --timeout 60000 --experimental-modules --es-module-specifier-resolution=node",
