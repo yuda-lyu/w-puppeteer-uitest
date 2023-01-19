@@ -1,17 +1,16 @@
 {
   "name": "w-puppeteer-uitest",
-  "version": "1.0.36",
-  "description": "A uitest package for web developer.",
+  "version": "1.0.37",
   "main": "",
   "dependencies": {
     "lodash": "^4.17.21",
-    "json5": "^2.2.1",
-    "jimp": "^0.16.1",
-    "puppeteer": "^13.5.2",
-    "wsemi": "^1.6.54"
+    "json5": "^2.2.3",
+    "jimp": "^0.16.2",
+    "puppeteer": "^19.5.2",
+    "wsemi": "^1.6.87"
   },
   "devDependencies": {
-    "w-package-tools": "^1.0.65"
+    "w-package-tools": "^1.0.66"
   },
   "scripts": {
     "test": "mocha --parallel --timeout 60000 --experimental-modules --es-module-specifier-resolution=node",
@@ -30,9 +29,5 @@
     "puppeteer"
   ],
   "author": "yuda-lyu(semisphere)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/yuda-lyu/w-puppeteer-uitest/issues"
-  },
-  "homepage": "https://github.com/yuda-lyu/w-puppeteer-uitest#readme"
+  "license": "MIT"
 }
