@@ -1,1 +1,1 @@
-{"version":3,"file":"readJson.umd.js","sources":["../src/readJson.mjs"],"sourcesContent":null,"names":["fn","c","fs","readFileSync","JSON5","parse"],"mappings":";;;;;sYAWA,SAAkBA,GACVC,IAAAA,EAAIC,EAAE,QAACC,aAAaH,EAAI,QAC5B,OAAOI,EAAK,QAACC,MAAMJ"}
+{"version":3,"file":"readJson.umd.js","sources":["../src/readJson.mjs"],"sourcesContent":null,"names":["fn","c","fs","readFileSync","JSON5","parse"],"mappings":";;;;;4SAWA,SAAkBA,GACd,IAAIC,EAAIC,EAAGC,aAAaH,EAAI,QAC5B,OAAOI,EAAMC,MAAMJ,EACvB"}
