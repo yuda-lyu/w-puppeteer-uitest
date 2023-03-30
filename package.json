@@ -1,16 +1,16 @@
 {
   "name": "w-puppeteer-uitest",
-  "version": "1.0.38",
+  "version": "1.0.39",
   "main": "",
   "dependencies": {
     "lodash": "^4.17.21",
     "json5": "^2.2.3",
     "jimp": "^0.22.7",
-    "puppeteer": "^19.8.0",
-    "wsemi": "^1.7.1"
+    "puppeteer": "^19.8.2",
+    "wsemi": "^1.7.2"
   },
   "devDependencies": {
-    "w-package-tools": "^1.0.68"
+    "w-package-tools": "^1.0.69"
   },
   "scripts": {
     "test": "mocha --parallel --timeout 60000 --experimental-modules --es-module-specifier-resolution=node",
