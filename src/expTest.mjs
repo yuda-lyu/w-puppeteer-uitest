@@ -1,5 +1,5 @@
 import fs from 'fs'
-import get from 'lodash/get'
+import get from 'lodash-es/get'
 import ispint from 'wsemi/src/ispint.mjs'
 import isnum from 'wsemi/src/isnum.mjs'
 import cint from 'wsemi/src/cint.mjs'

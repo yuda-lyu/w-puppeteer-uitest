@@ -5,6 +5,7 @@ A uitest package for web developer.
 [![npm version](http://img.shields.io/npm/v/w-puppeteer-uitest.svg?style=flat)](https://npmjs.org/package/w-puppeteer-uitest) 
 [![license](https://img.shields.io/npm/l/w-puppeteer-uitest.svg?style=flat)](https://npmjs.org/package/w-puppeteer-uitest) 
 [![npm download](https://img.shields.io/npm/dt/w-puppeteer-uitest.svg)](https://npmjs.org/package/w-puppeteer-uitest) 
+[![npm download](https://img.shields.io/npm/dm/w-puppeteer-uitest.svg)](https://npmjs.org/package/w-puppeteer-uitest) 
 [![jsdelivr download](https://img.shields.io/jsdelivr/npm/hm/w-puppeteer-uitest.svg)](https://www.jsdelivr.com/package/npm/w-puppeteer-uitest)
 
 ## Documentation
@@ -12,7 +13,7 @@ To view documentation or get support, visit [docs](https://yuda-lyu.github.io/w-
 
 ## Installation
 ### Using npm(ES6 module):
-> **Note:** w-puppeteer-uitest is mainly dependent on `puppeteer`, `jimp`, `lodash`, `wsemi`
+> **Note:** w-puppeteer-uitest is mainly dependent on `puppeteer`, `jimp`, `lodash-es`, `wsemi`
 ```alias
 npm i w-puppeteer-uitest
 ```
